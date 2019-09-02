@@ -34,7 +34,7 @@ public class JavaStreamApiTest {
     @Test
     public void oddSum() {
         Integer expectedResult = 9;
-        Integer result = javaStreamApi.oddSum(numbers);
+        Integer actualResult = javaStreamApi.oddSum(numbers);
         Assert.assertEquals(expected, result);
     }
 
