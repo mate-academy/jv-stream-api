@@ -14,11 +14,11 @@ import java.util.Optional;
 public class JavaStreamApiTest {
     private List<String> elements;
     private List<People> peopleList;
-    private JavaStreamApiAnswer javaStreamApi;
+    private JavaStreamApi javaStreamApi;
 
     @Before
     public void setUp() {
-        javaStreamApi = new JavaStreamApiAnswer();
+        javaStreamApi = new JavaStreamApi();
         elements = Arrays.asList("a1", "a2", "a3", "a1");
         peopleList = new ArrayList<>();
         peopleList.add(new People("Вася", 16, People.Sex.MAN));
