@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class JavaStreamApiAnswear {
+public class JavaStreamApiAnswer {
     /**
      * 1. Дано: List<Integer> numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует
