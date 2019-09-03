@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class JavaStreamApi {
 
@@ -23,9 +24,9 @@ public class JavaStreamApi {
 
     /**
      * 3. Дана коллекция строк Arrays.asList(«a1», «a2», «a3», «a1»).
-     * Вернуть первый элемент коллекции или 0, если коллекция пуста
+     * Вернуть Optional первого элемента коллекции
      **/
-    public String firstElement(List<String> elements) {
+    public Optional<String> firstElement(List<String> elements) {
         return null;
     }
 
@@ -70,8 +71,7 @@ public class JavaStreamApi {
      * - Найти всех потенциально работоспособных людей в выборке
      * (т.е. от 18 лет и учитывая что женщины выходят в 55 лет, а мужчина в 60)
      **/
-    public List<People> workablePeople(int femaleFromAge, int femaleToAge,
-                                       int maleFromAge, int maleToAge, List<People> peopleList) {
+    public List<People> workablePeople(int fromAge, int femaleToAge, int maleToAge, List<People> peopleList) {
         return Collections.emptyList();
     }
 
@@ -81,7 +81,7 @@ public class JavaStreamApi {
      * Дано класс Cat (name- имя кошки, age - возраст кошки).
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет
      **/
-    public List<People> femaleWithCat(List<People> peopleList, int femaleAge) {
+    public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return Collections.emptyList();
     }
 }
