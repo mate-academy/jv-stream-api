@@ -7,7 +7,7 @@ import java.util.Optional;
 public class JavaStreamApi {
 
     /**
-     * 1. Дано: List<Integer> numbers.
+     * 1. Дано: "List<Integer>" numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует
      **/
     public Integer oddSum(List<Integer> numbers) {
@@ -72,13 +72,15 @@ public class JavaStreamApi {
      * - Найти всех потенциально работоспособных людей в выборке
      * (т.е. от 18 лет и учитывая что женщины выходят в 55 лет, а мужчина в 60)
      **/
-    public List<People> workablePeople(int fromAge, int femaleToAge, int maleToAge, List<People> peopleList) {
+    public List<People> workablePeople(int fromAge, int femaleToAge,
+                                       int maleToAge, List<People> peopleList) {
         return Collections.emptyList();
     }
 
     /**
      * 7. Дано коллекцию Collection<People> peoples.
-     * Класс People (с полями name — имя, age — возраст, sex — пол, List<Cat> cats -  кошки этого человека).
+     * Класс People (с полями name — имя, age — возраст, sex — пол,
+     *                          "List<Cat>" cats -  кошки этого человека).
      * Дано класс Cat (name- имя кошки, age - возраст кошки).
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет
      **/

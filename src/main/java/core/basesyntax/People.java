@@ -41,13 +41,17 @@ public class People {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         People people = (People) o;
-        return age == people.age &&
-                Objects.equals(name, people.name) &&
-                sex == people.sex &&
-                Objects.equals(catList, people.catList);
+        return age == people.age
+                && Objects.equals(name, people.name)
+                && sex == people.sex
+                && Objects.equals(catList, people.catList);
     }
 
     @Override
@@ -57,12 +61,12 @@ public class People {
 
     @Override
     public String toString() {
-        return "People{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", sex=" + sex +
-                ", catList=" + catList +
-                '}';
+        return "People{"
+                + "name='" + name + '\''
+                + ", age=" + age
+                + ", sex=" + sex
+                + ", catList=" + catList
+                + '}';
     }
 
     public enum Sex {
