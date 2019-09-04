@@ -7,7 +7,7 @@ import java.util.Optional;
 public class JavaStreamApi {
 
     /**
-     * 1. Дано: "List<Integer>" numbers.
+     * 1. Дано: {@link List} of {@link Integer} numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует
      **/
     public Integer oddSum(List<Integer> numbers) {
@@ -80,7 +80,7 @@ public class JavaStreamApi {
     /**
      * 7. Дано коллекцию Collection<People> peoples.
      * Класс People (с полями name — имя, age — возраст, sex — пол,
-     *                          "List<Cat>" cats -  кошки этого человека).
+     *                          {@link List} of {@link Cat} cats -  кошки этого человека).
      * Дано класс Cat (name- имя кошки, age - возраст кошки).
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет
      **/
