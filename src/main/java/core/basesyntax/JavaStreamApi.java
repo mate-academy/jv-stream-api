@@ -32,7 +32,7 @@ public class JavaStreamApi {
 
     /**
      * 4. Дана коллекция строк Arrays.asList(«a1», «a2», «a3», «a1»).
-     * Найти элемент в коллекции равный «a3» или кинуть ошибку
+     * Найти элемент в коллекции равный «a3» или кинуть ошибку NoSuchElementException
      **/
     public String findElement(List<String> elements, String element) {
         return null;
@@ -43,6 +43,7 @@ public class JavaStreamApi {
      * Отнимите от каждого элемента, который стоит на непарной позиции
      * (имеет не парный индекс) 1
      * и верните среднее арифметическое всех нечетных чисел или киньте ошибку
+     * NoSuchElementException
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return null;
