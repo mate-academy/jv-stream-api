@@ -78,7 +78,7 @@ public class JavaStreamApi {
     }
 
     /**
-     * 7. Дано коллекцию Collection<People> peoples.
+     * 7. Дано коллекцию {@link List} of {@link People} peoples.
      * Класс People (с полями name — имя, age — возраст, sex — пол,
      *                          {@link List} of {@link Cat} cats -  кошки этого человека).
      * Дано класс Cat (name- имя кошки, age - возраст кошки).
