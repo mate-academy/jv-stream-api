@@ -53,6 +53,13 @@ public class JavaStreamApiTest {
     }
 
     @Test
+    public void oddSumOddAbsent() {
+        Integer expected = 0;
+        Integer result = javaStreamApi.oddSum(Arrays.asList(6, 2, 8, 4, 12));
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
     public void elementCount() {
         Long expected = 2L;
         Long result = javaStreamApi.elementCount(elements, "a1");
