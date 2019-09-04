@@ -43,6 +43,7 @@ public class JavaStreamApi {
      * Отнимите от каждого элемента, который стоит на непарной позиции
      * (имеет не парный индекс) 1
      * и верните среднее арифметическое всех нечетных чисел или киньте ошибку
+     * NoSuchElementException
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return null;
