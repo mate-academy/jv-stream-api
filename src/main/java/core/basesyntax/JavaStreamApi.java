@@ -32,7 +32,7 @@ public class JavaStreamApi {
 
     /**
      * 4. Дана коллекция строк Arrays.asList(«a1», «a2», «a3», «a1»).
-     * Найти элемент в коллекции равный «a3» или кинуть ошибку
+     * Найти элемент в коллекции равный «a3» или кинуть ошибку NoSuchElementException
      **/
     public String findElement(List<String> elements, String element) {
         return null;
