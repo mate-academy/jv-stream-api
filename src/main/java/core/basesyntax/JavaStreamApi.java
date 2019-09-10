@@ -18,8 +18,7 @@ public class JavaStreamApi {
         if (numbers == null) {
             return 0;
         }
-        Stream<Integer> stream = numbers.stream();
-        return stream.filter((n) -> n % 2 != 0)
+        return numbers.stream().filter((n) -> n % 2 != 0)
                 .mapToInt(Integer::intValue)
                 .sum();
     }
@@ -34,8 +33,7 @@ public class JavaStreamApi {
         if (elements == null || element == null) {
             return 0L;
         }
-        Stream<String> stream = elements.stream();
-        return stream.filter((n) -> n.equals(element)).count();
+        return elements.stream().filter((n) -> n.equals(element)).count();
     }
 
     /**
@@ -47,8 +45,7 @@ public class JavaStreamApi {
         if (elements == null) {
             return Optional.empty();
         }
-        Stream<String> stream = elements.stream();
-        return stream.findFirst();
+        return elements.stream().findFirst();
     }
 
     /**
@@ -62,10 +59,7 @@ public class JavaStreamApi {
         }
         Stream<String> stream = elements.stream();
         Optional<String> optional = stream.filter((n) -> n.equals(element)).findAny();
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-        throw new NoSuchElementException();
+        return optional.orElseThrow();
     }
 
     /**
@@ -98,8 +92,7 @@ public class JavaStreamApi {
         if (peopleList == null) {
             return Collections.emptyList();
         }
-        Stream<People> stream = peopleList.stream();
-        return stream.filter(n -> n.getSex().equals(People.Sex.MAN)
+        return peopleList.stream().filter(n -> n.getSex().equals(People.Sex.MAN)
                 && n.getAge() >= fromAge && n.getAge() <= toAge).collect(Collectors.toList());
     }
 
@@ -118,10 +111,9 @@ public class JavaStreamApi {
         if (peopleList == null) {
             return Collections.emptyList();
         }
-        Stream<People> stream = peopleList.stream();
-        return stream.filter(n -> n.getAge() >= fromAge
+        return peopleList.stream().filter(n -> n.getAge() >= fromAge
                 && (n.getSex().equals(People.Sex.MAN) && n.getAge() <= maleToAge)
-                | (n.getSex().equals(People.Sex.WOMEN)
+                || (n.getSex().equals(People.Sex.WOMEN)
                 && n.getAge() <= femaleToAge)).collect(Collectors.toList());
     }
 
