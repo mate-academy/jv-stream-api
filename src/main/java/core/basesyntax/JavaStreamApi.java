@@ -115,7 +115,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(i -> i.getSex() == People.Sex.WOMEN
                         && i.getAge() >= femaleAge
-                        && i.getCatList() != null)
+                        && !i.getCatList().isEmpty())
                 .flatMap(i -> i.getCatList().stream())
                 .map(i -> i.getName())
                 .collect(Collectors.toList());
