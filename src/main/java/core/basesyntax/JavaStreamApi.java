@@ -1,12 +1,10 @@
 package core.basesyntax;
 
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
-import java.time.Period;
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class JavaStreamApi {
 
@@ -17,8 +15,8 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
-                .filter(i -> (i&1) == 1)
-                .reduce(0, (x,y) -> x + y);
+                .filter(i -> (i & 1) == 1)
+                .reduce(0, (x, y) -> x + y);
     }
 
     /**
@@ -27,8 +25,8 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().
-                filter(item -> item.equals(element))
+        return elements.stream()
+                .filter(item -> item.equals(element))
                 .count();
     }
 
@@ -60,12 +58,12 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        for(int i = 1; i < numbers.size(); i+=2){
+        for (int i = 1; i < numbers.size(); i += 2) {
             int oldValue = numbers.get(i);
             numbers.set(i, oldValue - 1);
         }
         return numbers.stream().mapToInt(Integer::intValue)
-                .filter(item -> (item&1) == 1)
+                .filter(item -> (item & 1) == 1)
                 .average()
                 .orElseThrow(() -> new NoSuchElementException());
     }
@@ -100,7 +98,7 @@ public class JavaStreamApi {
                 .filter(new Predicate<People>() {
                     @Override
                     public boolean test(People people) {
-                        if(people.getSex() == People.Sex.MAN){
+                        if (people.getSex() == People.Sex.MAN) {
                             return people.getAge() <= maleToAge && people.getAge() >= fromAge;
                         }
                         return people.getAge() <= femaleToAge && people.getAge() >= fromAge;
@@ -116,7 +114,8 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex() == People.Sex.WOMEN && people.getAge() >= femaleAge)
+                .filter(people -> people.getSex() == People.Sex.WOMEN
+                        && people.getAge() >= femaleAge)
                 .map(people -> people.getCatList())
                 .flatMap(catList -> catList.stream())
                 .map(cat -> cat.getName())
