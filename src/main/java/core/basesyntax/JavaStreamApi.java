@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -79,8 +77,8 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(i -> i.getSex() == People.Sex.MAN)
-                .filter(i -> i.getAge() <= toAge
+                .filter(i -> i.getSex() == People.Sex.MAN
+                        && i.getAge() <= toAge
                         && i.getAge() >= fromAge)
                 .collect(Collectors.toList());
     }
@@ -98,10 +96,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(i -> i.getAge() >= fromAge)
-                .filter(i -> (i.getSex() == People.Sex.WOMEN
+                .filter(i -> (i.getAge() >= fromAge
+                        && i.getSex() == People.Sex.WOMEN
                         && i.getAge() <= femaleToAge)
-                        || (i.getSex() == People.Sex.MAN
+                        || (i.getAge() >= fromAge
+                        && i.getSex() == People.Sex.MAN
                         && i.getAge() <= maleToAge))
                 .collect(Collectors.toList());
     }
@@ -114,9 +113,9 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(i -> i.getAge() >= femaleAge
-                        && i.getCatList() != null
-                        && i.getSex() == People.Sex.WOMEN)
+                .filter(i -> i.getSex() == People.Sex.WOMEN
+                        && i.getAge() >= femaleAge
+                        && i.getCatList() != null)
                 .flatMap(i -> i.getCatList().stream())
                 .map(i -> i.getName())
                 .collect(Collectors.toList());
