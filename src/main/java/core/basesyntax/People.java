@@ -70,6 +70,6 @@ public class People {
     }
 
     public enum Sex {
-        MAN, WOMEN
+        MAN, WOMAN
     }
 }
