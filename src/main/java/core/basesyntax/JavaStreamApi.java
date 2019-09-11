@@ -1,6 +1,9 @@
 package core.basesyntax;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -54,7 +57,7 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-             IntStream.range(0, numbers.size())
+        IntStream.range(0, numbers.size())
                 .filter(i -> i % 2 != 0)
                 .forEach(n -> numbers.set(n, numbers.get(n) - 1));
         return numbers.stream()
