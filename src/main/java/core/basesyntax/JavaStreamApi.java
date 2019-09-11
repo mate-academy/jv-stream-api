@@ -18,7 +18,6 @@ public class JavaStreamApi {
                 .filter(number -> number % 2 != 0)
                 .reduce(Integer::sum)
                 .orElse(0);
-
     }
 
     /**
