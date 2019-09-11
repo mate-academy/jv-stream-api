@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class JavaStreamApi {
 
@@ -56,9 +57,9 @@ public class JavaStreamApi {
      * NoSuchElementException
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        for (int index = 1; index < numbers.size(); index = index + 2) {
-            numbers.set(index, numbers.get(index) - 1);
-        }
+        Stream.iterate((1), index -> index + 2)
+                .limit(numbers.size() / 2)
+                .forEach(index -> numbers.set(index, numbers.get(index) - 1));
         return numbers.stream()
                 .filter(number -> number % 2 != 0)
                 .mapToDouble(Integer::doubleValue)
@@ -75,8 +76,7 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return peopleList
-                .stream()
+        return peopleList.stream()
                 .filter(person -> person.getSex().equals(People.Sex.MAN)
                         && person.getAge() >= fromAge
                         && person.getAge() <= toAge)
