@@ -14,7 +14,7 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().mapToInt(Integer::intValue).filter(x -> x%2 == 1).sum();
+        return numbers.stream().mapToInt(Integer::intValue).filter(x -> x % 2 == 1).sum();
     }
 
     /**
@@ -41,8 +41,8 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-       return elements.stream().filter(element::equals).findAny()
-               .orElseThrow(NoSuchElementException::new);
+        return elements.stream().filter(element::equals).findAny()
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -52,8 +52,8 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        for (int i = 1; i < numbers.size(); i+=2) {
-        numbers.set(i,numbers.get(i) - 1);
+        for (int i = 1; i < numbers.size(); i += 2) {
+            numbers.set(i,numbers.get(i) - 1);
         }
         return numbers.stream().mapToInt(Integer::intValue)
                 .filter(x -> x % 2 != 0).average()
