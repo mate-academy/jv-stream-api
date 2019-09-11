@@ -16,7 +16,8 @@ public class JavaStreamApi {
         return numbers.stream()
                 .mapToInt(Integer::intValue)
                 .filter(num -> num % 2 == 1)
-                .reduce(0, (a, b) -> a + b);
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     /**
@@ -85,7 +86,8 @@ public class JavaStreamApi {
                 .stream()
                 .filter(man -> man.getAge() >= fromAge
                         && man.getAge() <= toAge
-                        && man.getSex() == People.Sex.MAN).collect(Collectors.toList());
+                        && man.getSex() == People.Sex.MAN)
+                .collect(Collectors.toList());
     }
 
     /**
