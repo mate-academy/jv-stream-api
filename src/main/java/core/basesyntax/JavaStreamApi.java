@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 public class JavaStreamApi {
 
     /**
@@ -97,9 +96,6 @@ public class JavaStreamApi {
      */
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-
-        //Stream<People> men = peopleList.stream().filter(person -> person.getSex().equals(People.Sex.MAN) && person.getAge() <= maleToAge && person.getAge() >= fromAge);
-        //Stream<People> women = peopleList.stream().filter(person -> person.getSex().equals(People.Sex.WOMAN) && person.getAge() <= femaleToAge && person.getAge() >= fromAge);
         return peopleList.stream()
                 .filter(person -> person.getAge() >= fromAge)
                 .filter(person -> (person.getSex().equals(People.Sex.MAN))
@@ -116,7 +112,8 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(person -> person.getSex().equals(People.Sex.WOMAN) && person.getAge() >= femaleAge)
+                .filter(person -> person.getSex().equals(People.Sex.WOMAN)
+                        && person.getAge() >= femaleAge)
                 .map(People::getCatList)
                 .flatMap(List::stream)
                 .map(Cat::getName)
