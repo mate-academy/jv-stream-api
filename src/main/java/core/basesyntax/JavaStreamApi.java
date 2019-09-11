@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
     private List<String> list = new ArrayList<>();
@@ -41,7 +42,8 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return elements.stream().filter(element::equals).findAny()
+        return elements.stream()
+                .filter(element::equals).findAny()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -52,11 +54,11 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        for (int i = 1; i < numbers.size(); i += 2) {
-            numbers.set(i,numbers.get(i) - 1);
-        }
-        return numbers.stream().mapToInt(Integer::intValue)
-                .filter(x -> x % 2 != 0).average()
+        IntStream.range(0,numbers.size())
+                .filter(i -> i % 2 != 0)
+                .forEach(i -> numbers.set(i, numbers.get(i) - 1));
+        return numbers.stream().filter(x -> x % 2 != 0)
+                .mapToInt(Integer::intValue).average()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -69,8 +71,11 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return peopleList.stream().filter((x) -> x.getSex() == People.Sex.MAN
-                && x.getAge() >= fromAge && x.getAge() <= toAge).collect(Collectors.toList());
+        return peopleList.stream()
+                .filter((x) -> x.getSex() == People.Sex.MAN
+                && x.getAge() >= fromAge
+                        && x.getAge() <= toAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -85,10 +90,14 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return peopleList.stream().filter(x -> x.getSex()
-                .equals(People.Sex.WOMEN) && x.getAge() >= fromAge && x.getAge() <= femaleToAge
-                || x.getSex().equals(People.Sex.MAN) && x.getAge() >= fromAge
-                && x.getAge() <= maleToAge).collect(Collectors.toList());
+        return peopleList.stream()
+                .filter(x -> x.getSex().equals(People.Sex.WOMEN)
+                        && x.getAge() >= fromAge
+                        && x.getAge() <= femaleToAge
+                        || x.getSex().equals(People.Sex.MAN)
+                        && x.getAge() >= fromAge
+                        && x.getAge() <= maleToAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -98,8 +107,12 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        return peopleList.stream().filter(x -> x.getAge() >= femaleAge && x.getSex()
-                .equals(People.Sex.WOMEN)).map(female -> female.getCatList())
-                .flatMap(cats -> cats.stream()).map(Cat::getName).collect(Collectors.toList());
+        return peopleList.stream()
+                .filter(x -> x.getAge() >= femaleAge
+                        && x.getSex().equals(People.Sex.WOMEN))
+                .map(female -> female.getCatList())
+                .flatMap(cats -> cats.stream())
+                .map(Cat::getName)
+                .collect(Collectors.toList());
     }
 }
