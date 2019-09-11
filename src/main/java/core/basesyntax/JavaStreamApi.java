@@ -3,7 +3,8 @@ package core.basesyntax;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static java.util.stream.IntStream.iterate;
 
 public class JavaStreamApi {
 
@@ -57,7 +58,7 @@ public class JavaStreamApi {
      * NoSuchElementException
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        Stream.iterate(1, index -> index + 2)
+        iterate(1, index -> index + 2)
                 .limit(numbers.size() / 2)
                 .forEach(index -> numbers.set(index, numbers.get(index) - 1));
         return numbers.stream()
