@@ -1,12 +1,13 @@
 package core.basesyntax;
 
-import java.net.Inet4Address;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JavaStreamApi {
     private List<String> list = new ArrayList<>();
-
 
     /**
      * <p>1. Дано: List of Integer numbers.
@@ -55,7 +56,7 @@ public class JavaStreamApi {
         numbers.set(i,numbers.get(i) - 1);
         }
         return numbers.stream().mapToInt(Integer::intValue)
-                .filter(x -> x%2 != 0).average()
+                .filter(x -> x % 2 != 0).average()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -86,8 +87,8 @@ public class JavaStreamApi {
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream().filter(x -> x.getSex()
                 .equals(People.Sex.WOMEN) && x.getAge() >= fromAge && x.getAge() <= femaleToAge
-                || x.getSex().equals(People.Sex.MAN) && x.getAge() >= fromAge && x.getAge() <= maleToAge)
-                .collect(Collectors.toList());
+                || x.getSex().equals(People.Sex.MAN) && x.getAge() >= fromAge
+                && x.getAge() <= maleToAge).collect(Collectors.toList());
     }
 
     /**
@@ -98,7 +99,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream().filter(x -> x.getAge() >= femaleAge && x.getSex()
-              .equals(People.Sex.WOMEN)).map(female -> female.getCatList()).flatMap(cats -> cats.stream())
-              .map(Cat::getName).collect(Collectors.toList());
+                .equals(People.Sex.WOMEN)).map(female -> female.getCatList())
+                .flatMap(cats -> cats.stream()).map(Cat::getName).collect(Collectors.toList());
     }
 }
