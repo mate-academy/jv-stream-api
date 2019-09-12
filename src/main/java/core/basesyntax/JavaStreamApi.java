@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import static java.util.stream.IntStream.iterate;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.stream.IntStream.iterate;
 
 public class JavaStreamApi {
 
