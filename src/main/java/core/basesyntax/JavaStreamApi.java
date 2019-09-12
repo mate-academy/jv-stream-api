@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class JavaStreamApi {
@@ -27,8 +28,7 @@ public class JavaStreamApi {
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
                 .filter(string -> string.equals(element))
-                .mapToLong((string) -> 1)
-                .sum();
+                .count();
     }
 
     /**
@@ -59,12 +59,9 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return Stream.iterate(0, x -> x + 1)
-                .limit(numbers.size())
+        return IntStream.range(0, numbers.size())
                 .map(x -> x % 2 == 0 ? numbers.get(x) : numbers.get(x) - 1)
                 .filter(x -> x % 2 == 1)
-                .mapToInt(x -> x)
-                //.flatMapToInt(x -> IntStream.of(x % 2 == 0 ? 0 : x))
                 .average()
                 .orElseThrow(() -> new NoSuchElementException());
 
