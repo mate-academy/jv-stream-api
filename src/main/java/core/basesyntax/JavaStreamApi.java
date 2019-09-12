@@ -1,11 +1,11 @@
 package core.basesyntax;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
 
@@ -24,8 +24,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        int result = Collections.frequency(elements, element);
-        return Long.valueOf(result);
+        return elements.stream()
+                .filter(p -> p.equals(element))
+                .count();
     }
 
     /**
@@ -34,8 +35,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        Optional<String> firstElement = elements.stream().findFirst();
-        return firstElement;
+        return elements.stream().findFirst();
+
     }
 
     /**
@@ -45,13 +46,10 @@ public class JavaStreamApi {
      * или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        String result = "";
-        if (elements.contains(element)) {
-            result = element;
-        } else {
-            throw new NoSuchElementException();
-        }
-        return result;
+        return elements.stream()
+                .filter(p -> p.equals(element))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -61,13 +59,9 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        for (int i = 1; i < numbers.size(); i += 2) {
-            Integer value = numbers.get(i);
-            numbers.set(i, value - 1);
-        }
-        return numbers.stream()
-                .mapToInt(Integer::intValue)
-                .filter(n -> n % 2 != 0)
+        return IntStream.range(0, numbers.size())
+                .mapToDouble(p -> (p % 2) != 0 ? numbers.get(p) - 1 : numbers.get(p))
+                .filter(z -> z % 2 != 0)
                 .average()
                 .orElseThrow(NoSuchElementException::new);
     }
@@ -82,8 +76,10 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         peopleList = peopleList.stream()
-                .filter(p -> p.getAge() >= fromAge && p.getAge() <= toAge
-                        && p.getSex() == People.Sex.MAN).collect(Collectors.toList());
+                .filter(p -> p.getAge() >= fromAge)
+                .filter(p -> p.getAge() <= toAge)
+                .filter(p -> p.getSex() == People.Sex.MAN)
+                .collect(Collectors.toList());
         return peopleList;
     }
 
@@ -99,7 +95,8 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        peopleList = peopleList.stream().filter(p -> p.getAge() >= fromAge)
+        peopleList = peopleList.stream()
+                .filter(p -> p.getAge() >= fromAge)
                 .filter(p -> (p.getAge() <= maleToAge) && (p.getSex() == People.Sex.MAN)
                         || (p.getAge() <= femaleToAge && p.getSex() == People.Sex.WOMEN))
                 .collect(Collectors.toList());
