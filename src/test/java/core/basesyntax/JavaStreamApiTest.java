@@ -23,15 +23,15 @@ public class JavaStreamApiTest {
         peopleList = new ArrayList<>();
         peopleList.add(new People("Вася", 16, People.Sex.MAN));
         peopleList.add(new People("Петя", 23, People.Sex.MAN));
-        peopleList.add(new People("Елена", 42, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.add(new People("Елена", 42, People.Sex.WOMAN, new ArrayList<>()));
         peopleList.get(2).getCatList().add(new Cat("Матроскин", 2));
         peopleList.get(2).getCatList().add(new Cat("Барсик", 3));
         peopleList.add(new People("Иван Иванович", 69, People.Sex.MAN));
         peopleList.add(new People("Коля", 37, People.Sex.MAN, new ArrayList<>()));
         peopleList.get(4).getCatList().add(new Cat("Лия", 1));
-        peopleList.add(new People("Мария", 28, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.add(new People("Мария", 28, People.Sex.WOMAN, new ArrayList<>()));
         peopleList.get(5).getCatList().add(new Cat("Моня", 1));
-        peopleList.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.add(new People("Ирина Алескандровна", 55, People.Sex.WOMAN, new ArrayList<>()));
         peopleList.get(6).getCatList().add(new Cat("Киса", 3));
         peopleList.get(6).getCatList().add(new Cat("КотЭ", 4));
         peopleList.add(new People("Роман", 25, People.Sex.MAN));
@@ -153,14 +153,14 @@ public class JavaStreamApiTest {
     public void workablePeople() {
         List<People> expected = new ArrayList<>();
         expected.add(new People("Петя", 23, People.Sex.MAN));
-        expected.add(new People("Елена", 42, People.Sex.WOMEN, new ArrayList<>()));
+        expected.add(new People("Елена", 42, People.Sex.WOMAN, new ArrayList<>()));
         expected.get(1).getCatList().add(new Cat("Матроскин", 2));
         expected.get(1).getCatList().add(new Cat("Барсик", 3));
         expected.add(new People("Коля", 37, People.Sex.MAN, new ArrayList<>()));
         expected.get(2).getCatList().add(new Cat("Лия", 1));
-        expected.add(new People("Мария", 28, People.Sex.WOMEN, new ArrayList<>()));
+        expected.add(new People("Мария", 28, People.Sex.WOMAN, new ArrayList<>()));
         expected.get(3).getCatList().add(new Cat("Моня", 1));
-        expected.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
+        expected.add(new People("Ирина Алескандровна", 55, People.Sex.WOMAN, new ArrayList<>()));
         expected.get(4).getCatList().add(new Cat("Киса", 3));
         expected.get(4).getCatList().add(new Cat("КотЭ", 4));
         expected.add(new People("Роман", 25, People.Sex.MAN));
