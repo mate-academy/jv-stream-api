@@ -1,10 +1,10 @@
 package core.basesyntax;
 
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class JavaStreamApi {
 
@@ -81,7 +81,7 @@ public class JavaStreamApi {
                 .filter(person -> person.getSex().equals(People.Sex.MAN))
                 .filter(person -> person.getAge() >= fromAge)
                 .filter(person -> person.getAge() <= toAge)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**
@@ -102,7 +102,7 @@ public class JavaStreamApi {
                 .filter(person -> (person.getSex().equals(People.Sex.MAN))
                         ? person.getAge() <= maleToAge
                         : person.getAge() <= femaleToAge)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     /**
@@ -118,6 +118,6 @@ public class JavaStreamApi {
                 .map(People::getCatList)
                 .flatMap(List::stream)
                 .map(Cat::getName)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }
