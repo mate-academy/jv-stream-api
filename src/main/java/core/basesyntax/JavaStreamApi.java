@@ -54,12 +54,7 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .mapToDouble(x -> {
-                    if (x % 2 != 0) {
-                        return numbers.get(x) - 1;
-                    }
-                    return numbers.get(x);
-                })
+                .mapToDouble(x -> (x % 2) != 0 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> x % 2 != 0)
                 .average()
                 .orElseThrow(NoSuchElementException::new);
