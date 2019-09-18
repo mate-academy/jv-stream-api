@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class People {
         this.name = name;
         this.age = age;
         this.sex = sex;
+        catList = new ArrayList<>();
     }
 
     public People(String name, int age, Sex sex, List<Cat> catList) {
