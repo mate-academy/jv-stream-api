@@ -14,6 +14,7 @@ import java.util.Optional;
 public class JavaStreamApiTest {
     private List<String> elements;
     private List<People> peopleList;
+    private List<People> peopleListWithoutCat;
     private JavaStreamApi javaStreamApi;
 
     @Before
@@ -29,12 +30,18 @@ public class JavaStreamApiTest {
         peopleList.add(new People("Иван Иванович", 69, People.Sex.MAN));
         peopleList.add(new People("Коля", 37, People.Sex.MAN, new ArrayList<>()));
         peopleList.get(4).getCatList().add(new Cat("Лия", 1));
-        peopleList.add(new People("Мария", 28, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.add(new People("Мария", 25, People.Sex.WOMEN, new ArrayList<>()));
         peopleList.get(5).getCatList().add(new Cat("Моня", 1));
         peopleList.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
         peopleList.get(6).getCatList().add(new Cat("Киса", 3));
         peopleList.get(6).getCatList().add(new Cat("КотЭ", 4));
         peopleList.add(new People("Роман", 25, People.Sex.MAN));
+
+        peopleListWithoutCat = new ArrayList<>();
+        peopleListWithoutCat.add(new People("Елена", 16, People.Sex.WOMEN));
+        peopleListWithoutCat.add(new People("Мария", 25, People.Sex.WOMEN));
+        peopleListWithoutCat.add(new People("Ирина Алескандровна", 20, People.Sex.WOMEN));
+        peopleListWithoutCat.add(new People("Вася", 23, People.Sex.MAN));
     }
 
     @Test
@@ -158,7 +165,7 @@ public class JavaStreamApiTest {
         expected.get(1).getCatList().add(new Cat("Барсик", 3));
         expected.add(new People("Коля", 37, People.Sex.MAN, new ArrayList<>()));
         expected.get(2).getCatList().add(new Cat("Лия", 1));
-        expected.add(new People("Мария", 28, People.Sex.WOMEN, new ArrayList<>()));
+        expected.add(new People("Мария", 25, People.Sex.WOMEN, new ArrayList<>()));
         expected.get(3).getCatList().add(new Cat("Моня", 1));
         expected.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
         expected.get(4).getCatList().add(new Cat("Киса", 3));
@@ -179,6 +186,13 @@ public class JavaStreamApiTest {
     public void getCatsNames() {
         List<String> expected = Arrays.asList("Матроскин", "Барсик", "Моня", "Киса", "КотЭ");
         List<String> result = javaStreamApi.getCatsNames(peopleList, 18);
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void getEmptyListCatsNames() {
+        List<String> expected = new ArrayList<>();
+        List<String> result = javaStreamApi.getCatsNames(peopleListWithoutCat, 18);
         Assert.assertEquals(expected, result);
     }
 
