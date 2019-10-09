@@ -6,12 +6,17 @@ import java.util.Optional;
 
 public class JavaStreamApi {
 
-    /**
+      /**
      * <p>1. Дано: List of Integer numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return null;
+
+        return numbers
+                .stream()
+                .filter(x -> x % 2 == 1)
+                .reduce((x,y)->x+y)
+                .orElse(0);
     }
 
     /**
