@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -117,7 +116,7 @@ public class JavaStreamApi {
                 .filter(girl -> girl.getAge() > femaleAge
                         && girl.getSex().equals(People.Sex.WOMEN))
                 .map(People::getCatList)
-                .flatMap(Collection::stream)
+                .flatMap(List::stream)
                 .map(Cat::getName)
                 .collect(Collectors.toList());
     }
