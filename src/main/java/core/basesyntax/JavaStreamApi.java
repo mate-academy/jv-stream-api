@@ -2,16 +2,24 @@ package core.basesyntax;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
 
     /**
      * <p>1. Дано: List of Integer numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
-     **/
+     *
+     * @return
+     */
     public Integer oddSum(List<Integer> numbers) {
-        return null;
+        return numbers.stream()
+                .filter(integer -> integer % 2 == 1)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     /**
@@ -20,7 +28,10 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return null;
+
+        return elements.stream()
+                .filter(element::equals)
+                .count();
     }
 
     /**
@@ -29,7 +40,7 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return null;
+        return elements.stream().findFirst();
     }
 
     /**
@@ -38,7 +49,10 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return null;
+        return elements.stream()
+                .filter(element::equals)
+                .findFirst()
+                .orElseThrow();
     }
 
     /**
@@ -48,7 +62,13 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return null;
+        Integer[] numbersArray = numbers.toArray(new Integer[numbers.size()]);
+
+        return IntStream.range(0, numbersArray.length)
+                .filter(i -> i % 2 == 1)
+                .map(i -> numbersArray[i] - 1)
+                .filter(i -> i % 2 == 1)
+                .average().orElseThrow();
     }
 
     /**
