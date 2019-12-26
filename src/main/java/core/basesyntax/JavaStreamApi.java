@@ -1,7 +1,9 @@
 package core.basesyntax;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -98,8 +100,6 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-
-
         return peopleList.stream()
                 .filter(p -> femaleAge < p.getAge() & p.getSex().equals(People.Sex.WOMEN))
                 .map(People::getCatList)
