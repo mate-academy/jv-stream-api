@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,11 +35,7 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return Objects.nonNull(elements)
-                ? elements.isEmpty()
-                ? Optional.empty()
-                : Optional.of(elements.get(0))
-                : Optional.empty();
+        return elements.stream().findFirst();
     }
 
     /**
