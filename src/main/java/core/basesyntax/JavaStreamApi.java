@@ -1,6 +1,9 @@
 package core.basesyntax;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -113,7 +116,8 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
 
         return peopleList.stream()
-                .filter((person) -> person.getSex() == People.Sex.WOMEN && person.getAge() > femaleAge)
+                .filter((person) -> person.getSex() == People.Sex.WOMEN
+                        && person.getAge() > femaleAge)
                 .map(People::getCatList)
                 .flatMap(Collection::stream)
                 .map(Cat::getName)
