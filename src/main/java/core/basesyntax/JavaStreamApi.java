@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -106,13 +105,12 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        List<Cat> cats = new ArrayList<>();
-        peopleList.stream()
+        return peopleList.stream()
                 .filter(p -> p.getSex() == People.Sex.WOMEN
                         && p.getAge() >= femaleAge)
-                .forEach(p -> cats.addAll(p.getCatList()));
-        return cats.stream()
-                .map(Cat::getName)
+                .map(p -> p.getCatList())
+                .flatMap(List::stream)
+                .map(c -> c.getName())
                 .collect(Collectors.toList());
     }
 }
