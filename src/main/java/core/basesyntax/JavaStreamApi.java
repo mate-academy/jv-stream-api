@@ -14,11 +14,10 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        int result = numbers
+        return numbers
                 .stream()
                 .filter(number -> number % 2 != 0)
                 .reduce(0,(odd, oddNext) -> odd + oddNext);
-        return result;
     }
 
     /**
@@ -27,11 +26,10 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        Long result = elements
+        return elements
                 .stream()
                 .filter(s -> s.equals(element))
                 .count();
-        return result;
     }
 
     /**
