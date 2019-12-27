@@ -1,12 +1,10 @@
 package core.basesyntax;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class JavaStreamApi {
 
@@ -63,7 +61,7 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .map(x -> x % 2 !=0 ? numbers.get(x) - 1 : numbers.get(x))
+                .map(x -> x % 2 != 0 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> x % 2 != 0)
                 .average()
                 .orElseThrow(NoSuchElementException::new);
