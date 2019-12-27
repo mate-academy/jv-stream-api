@@ -33,7 +33,7 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.size() == 0 ? Optional.empty() : Optional.ofNullable(elements.get(0));
+        return elements.stream().findFirst();
     }
 
     /**
