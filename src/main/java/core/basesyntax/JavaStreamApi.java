@@ -13,7 +13,7 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().mapToInt((n) -> Integer.parseInt(String.valueOf(n)))
+        return numbers.stream().mapToInt(Integer::intValue)
                 .filter(n -> n % 2 != 0).sum();
     }
 
