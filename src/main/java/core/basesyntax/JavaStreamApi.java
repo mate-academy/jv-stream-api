@@ -35,10 +35,9 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        Optional<String> result = elements
+        return elements
                 .stream()
                 .findFirst();
-        return result;
     }
 
     /**
@@ -77,9 +76,8 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(people -> people != null)
-                .filter(people -> people.getAge() >= fromAge && people.getAge() <= toAge)
-                .filter(people -> people.getSex() == People.Sex.MAN)
+                .filter(people -> people.getAge() >= fromAge && people.getAge() <= toAge
+                        && people.getSex() == People.Sex.MAN)
                 .collect(Collectors.toList());
     }
 
@@ -96,8 +94,8 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(x -> x.getAge() >= fromAge)
-                .filter(x -> x.getSex().equals(People.Sex.MAN) && x.getAge() <= maleToAge
+                .filter(x -> x.getAge() >= fromAge
+                        && x.getSex().equals(People.Sex.MAN) && x.getAge() <= maleToAge
                         || x.getSex().equals(People.Sex.WOMEN) && x.getAge() <= femaleToAge)
                 .collect(Collectors.toList());
     }
