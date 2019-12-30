@@ -31,10 +31,7 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        if (elements.size() > 0) {
-            return Optional.ofNullable(elements.get(0));
-        }
-        return Optional.empty();
+        return elements.stream().findFirst();
     }
 
     /**
@@ -45,8 +42,7 @@ public class JavaStreamApi {
     public String findElement(List<String> elements, String element) {
         return elements.stream()
                 .filter(x -> x.equals(element))
-                .limit(1)
-                .reduce((x, y) -> x)
+                .findAny()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -97,7 +93,8 @@ public class JavaStreamApi {
                 && x.getAge() <= maleToAge)
                 || (x.getSex().equals(People.Sex.WOMEN)
                 && (x.getAge() >= fromAge
-                && x.getAge() <= femaleToAge))).collect(Collectors.toList());
+                && x.getAge() <= femaleToAge)))
+                .collect(Collectors.toList());
     }
 
     /**
