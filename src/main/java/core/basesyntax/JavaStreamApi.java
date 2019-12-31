@@ -1,8 +1,10 @@
 package core.basesyntax;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class JavaStreamApi {
 
@@ -11,7 +13,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return null;
+        return Optional.of(numbers.stream().filter(e -> e % 2 != 0)
+                .mapToInt((i) -> i)
+                .sum()).orElse(0);
     }
 
     /**
@@ -20,7 +24,7 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return null;
+        return elements.stream().filter(s -> s.contains(element)).count();
     }
 
     /**
@@ -29,7 +33,7 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return null;
+        return elements.stream().findFirst();
     }
 
     /**
@@ -38,7 +42,9 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return null;
+        return elements.stream().filter(s -> s.equals(element))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -48,7 +54,15 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return null;
+        for (int i = 0; i < numbers.size(); i++) {
+            if (i % 2 != 0) {
+                numbers.set(i, numbers.get(i) - 1);
+            }
+        }
+        return Optional.of(numbers.stream()
+                .mapToDouble(Integer::doubleValue).filter(s -> s % 2 != 0)
+                .average().getAsDouble())
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -60,7 +74,11 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(sex -> sex.getSex() == People.Sex.MAN
+                        && (sex.getAge() >= fromAge
+                        && sex.getAge() <= toAge))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -75,7 +93,14 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(workAble -> workAble.getSex() == People.Sex.MAN
+                        && workAble.getAge() >= fromAge
+                        && workAble.getAge() <= maleToAge
+                        || workAble.getSex() == People.Sex.WOMEN
+                        && workAble.getAge() >= fromAge
+                        && workAble.getAge() <= femaleToAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -85,6 +110,14 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        return Collections.emptyList();
+        List<String> cats = new ArrayList<>();
+        peopleList.stream().filter(girl -> girl.getSex() == People.Sex.WOMEN
+                && girl.getAge() >= femaleAge)
+                .forEach((girl) -> {
+                    for (Cat cat:girl.getCatList()) {
+                        cats.add(cat.getName());
+                    }
+                });
+        return cats;
     }
 }
