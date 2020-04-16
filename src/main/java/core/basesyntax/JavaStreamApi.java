@@ -48,7 +48,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(value -> value.equals(element))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -63,7 +63,7 @@ public class JavaStreamApi {
                 .mapToDouble(x -> x % 2 != 0 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> x % 2 != 0)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
