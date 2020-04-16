@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,8 +15,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(i -> i % 2 == 1)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -27,9 +25,8 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .mapToLong(str -> str.split(element, -1).length - 1)
-                .reduce(Long::sum)
-                .orElse(0);
+                .filter(element::equals)
+                .count();
     }
 
     /**
@@ -49,9 +46,9 @@ public class JavaStreamApi {
      **/
     public String findElement(List<String> elements, String element) {
         return elements.stream()
-                .filter(s -> s.equals(element))
+                .filter(element::equals)
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -65,7 +62,7 @@ public class JavaStreamApi {
                 .map(i -> (i % 2 == 1) ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(i -> i % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
