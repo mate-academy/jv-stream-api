@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,7 +12,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().mapToInt(n -> n % 2 == 1 ? n : 0).sum();
+        return numbers.stream()
+                .filter(n -> n % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -22,7 +23,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(e -> e.equals(element)).count();
+        return elements.stream()
+                .filter(e -> e.equals(element))
+                .count();
     }
 
     /**
@@ -43,7 +46,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(e -> e.equals(element))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -54,10 +57,10 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .mapToDouble(n -> n % 2 == 1 ? numbers.get(n) - 1 : numbers.get(n))
+                .map(n -> n % 2 == 1 ? numbers.get(n) - 1 : numbers.get(n))
                 .filter(n -> n % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
