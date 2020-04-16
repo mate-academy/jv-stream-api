@@ -12,12 +12,10 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-
-        return (numbers
+        return numbers
                 .stream()
                 .filter(x -> (x % 2 == 1))
-                .mapToInt(x -> x)
-                .sum());
+                .reduce(0, (sum, x) -> sum + x);
     }
 
     /**
@@ -26,10 +24,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-
         return elements
                 .stream()
-                .filter(x -> (x.toLowerCase().equals(element)))
+                .filter(x -> (x.equals(element)))
                 .count();
     }
 
@@ -39,7 +36,6 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-
         return elements
                 .stream()
                 .findFirst();
@@ -51,10 +47,9 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-
         return elements
                  .stream()
-                 .filter(x -> (x.toLowerCase().equals(element)))
+                 .filter(x -> (x.equals(element)))
                  .findAny()
                  .orElseThrow();
     }
@@ -66,7 +61,6 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-
         return IntStream
                 .range(0, numbers.size())
                 .mapToDouble(x -> ((x % 2 == 1) ? numbers.get(x) - 1 : numbers.get(x)))
@@ -84,7 +78,6 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-
         return peopleList
                  .stream()
                  .filter(x -> (x.getAge() >= fromAge
@@ -122,7 +115,6 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-
         return peopleList
                 .stream()
                 .filter(x -> (x.getAge() >= femaleAge && x.getSex().equals(People.Sex.WOMEN)))
