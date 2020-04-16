@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,11 +27,11 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return (long) elements
+        return elements
                 .stream()
                 .filter(x -> x.equals(element))
                 .mapToInt(p -> 1)
-                .sum();
+                .count();
     }
 
     /**
@@ -65,12 +65,10 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        int[] mass = IntStream
+        return Arrays.stream(IntStream
                 .range(0, numbers.size())
                 .map(x -> x % 2 != 0 ? numbers.get(x) - 1 : numbers.get(x))
-                .toArray();
-        return Arrays
-                .stream(mass)
+                .toArray())
                 .filter(x -> x % 2 != 0)
                 .average()
                 .orElseThrow();
@@ -120,14 +118,13 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        List<String> result = new ArrayList<>();
-        peopleList.stream()
+        return peopleList.stream()
                 .filter(x -> x.getAge() > femaleAge && x.getSex() == People.Sex.WOMEN)
                 .map(x -> x.getCatList()
                         .stream()
-                        .map(y -> y.getName())
+                        .map(Cat::getName)
                         .collect(Collectors.toList()))
-                .forEach(x -> result.addAll(x));
-        return result;
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }
