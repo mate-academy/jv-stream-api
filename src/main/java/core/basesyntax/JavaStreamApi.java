@@ -13,8 +13,8 @@ public class JavaStreamApi {
      **/
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
-                .mapToInt(x -> x % 2 == 1 ? x : 0)
-                .sum();
+                .map(x -> x % 2 == 1 ? x : 0)
+                .reduce(0, Integer::sum);
     }
 
     /**
