@@ -15,8 +15,8 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 == 1)
-                .mapToInt(Integer::intValue)
-                .sum();
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     /**
@@ -26,7 +26,7 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .filter(x -> x.contains(element))
+                .filter(x -> x.equals(element))
                 .count();
     }
 
@@ -47,7 +47,7 @@ public class JavaStreamApi {
      **/
     public String findElement(List<String> elements, String element) {
         return elements.stream()
-                .filter(x -> x.contains(element))
+                .filter(x -> x.equals(element))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(element));
     }
@@ -65,7 +65,7 @@ public class JavaStreamApi {
                 .filter(x -> x % 2 != 0)
                 .mapToDouble(Double::valueOf)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new NoSuchElementException("Wrong parameters."));
     }
 
     /**
