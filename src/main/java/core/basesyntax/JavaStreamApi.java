@@ -49,7 +49,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(x -> x.equals(element))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(element));
+                .orElseThrow();
     }
 
     /**
@@ -65,7 +65,7 @@ public class JavaStreamApi {
                 .filter(x -> x % 2 != 0)
                 .mapToDouble(Double::valueOf)
                 .average()
-                .orElseThrow(() -> new NoSuchElementException("Wrong parameters."));
+                .orElseThrow();
     }
 
     /**
