@@ -1,6 +1,8 @@
 package core.basesyntax;
 
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -62,7 +64,6 @@ public class JavaStreamApi {
                 .average()
                 .orElseThrow();
     }
-
 
     /**
      * <p>6. Дана коллекция класс People (с полями name — имя, age — возраст, sex — пол),
