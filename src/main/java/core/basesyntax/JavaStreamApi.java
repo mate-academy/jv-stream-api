@@ -14,9 +14,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return IntStream
-                .range(0, numbers.size())
-                .map(numbers::get)
+        return numbers
+                .stream()
+                .mapToInt(x->x)
                 .filter(x -> x % 2 != 0)
                 .sum();
     }
@@ -65,12 +65,10 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return Arrays.stream(IntStream
+        return IntStream
                 .range(0, numbers.size())
                 .map(x -> x % 2 != 0 ? numbers.get(x) - 1 : numbers.get(x))
-                .toArray())
-                .filter(x -> x % 2 != 0)
-                .average()
+                .filter(x -> x % 2 != 0).average()
                 .orElseThrow();
     }
 
@@ -120,11 +118,8 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
                 .filter(x -> x.getAge() > femaleAge && x.getSex() == People.Sex.WOMEN)
-                .map(x -> x.getCatList()
-                        .stream()
-                        .map(Cat::getName)
-                        .collect(Collectors.toList()))
-                .flatMap(Collection::stream)
+                .flatMap(p -> p.getCatList().stream())
+                .map(Cat::getName)
                 .collect(Collectors.toList());
     }
 }
