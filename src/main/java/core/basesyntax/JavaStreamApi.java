@@ -13,7 +13,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().filter(n -> n % 2 == 1).mapToInt(n -> n).sum();
+        return numbers.stream()
+                .filter(n -> n % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -22,7 +24,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(value -> value.equals(element)).count();
+        return elements.stream()
+                .filter(value -> value.equals(element))
+                .count();
     }
 
     /**
@@ -31,7 +35,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -40,7 +45,8 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return elements.stream().filter(value -> value.equals(element))
+        return elements.stream()
+                .filter(value -> value.equals(element))
                 .findAny()
                 .orElseThrow(NoSuchElementException::new);
     }
@@ -69,7 +75,8 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return peopleList.stream().filter(p -> p.getAge() >= fromAge && p.getAge() < toAge
+        return peopleList.stream()
+                .filter(p -> p.getAge() >= fromAge && p.getAge() < toAge
                 && p.getSex() == People.Sex.MAN)
                 .collect(Collectors.toList());
     }
