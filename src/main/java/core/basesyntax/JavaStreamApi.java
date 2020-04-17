@@ -26,7 +26,7 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .filter(e -> e.contains(element))
+                .filter(e -> e.equals(element))
                 .count();
     }
 
@@ -49,7 +49,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(e -> e.contains(element))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -115,8 +115,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(p -> p.getSex().equals(People.Sex.WOMEN)
                         && p.getAge() > femaleAge)
-                .flatMap(p -> p.getCatList()
-                        .stream())
+                .flatMap(p -> p.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
     }
