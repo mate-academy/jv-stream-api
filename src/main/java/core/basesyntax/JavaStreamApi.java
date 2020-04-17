@@ -65,7 +65,7 @@ public class JavaStreamApi {
 
         return IntStream
                 .range(0, numbers.size())
-                .mapToDouble(x -> ((x % 2 == 1) ? numbers.get(x) - 1 : numbers.get(x)))
+                .mapToDouble(x -> x % 2 == 1 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> (x % 2 == 1))
                 .average()
                 .orElseThrow();
@@ -82,8 +82,9 @@ public class JavaStreamApi {
 
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.MAN))
-                .filter(people -> people.getAge() > fromAge && people.getAge() < toAge)
+                .filter(people -> people.getAge() >= fromAge
+                        && people.getAge() <= toAge
+                        && people.getSex().equals(People.Sex.MAN))
                 .collect(Collectors.toList());
     }
 
@@ -118,7 +119,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(people -> people.getSex().equals(People.Sex.WOMEN)
                 && people.getAge() > femaleAge)
-                .flatMap(people -> people.getCatList().stream().map(cat -> cat.getName()))
+                .flatMap(people -> people.getCatList().stream().map(Cat::getName))
                 .collect(Collectors.toList());
     }
 }
