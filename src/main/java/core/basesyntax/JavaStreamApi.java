@@ -28,7 +28,6 @@ public class JavaStreamApi {
         return elements
                 .stream()
                 .filter(x -> x.equals(element))
-                .mapToInt(p -> 1)
                 .count();
     }
 
