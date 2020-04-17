@@ -70,8 +70,9 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return peopleList.stream().filter(people -> people.getSex() == People.Sex.MAN)
-                .filter(people -> people.getAge() > fromAge && people.getAge() < toAge)
+        return peopleList.stream()
+                .filter(people -> people.getSex() == People.Sex.MAN
+                        && people.getAge() > fromAge && people.getAge() < toAge)
                 .collect(Collectors.toList());
     }
 
