@@ -13,7 +13,6 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-
         return numbers.stream()
                 .filter(number -> number % 2 == 1)
                 .reduce(0, Integer::sum);
@@ -76,8 +75,8 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex() == People.Sex.MAN && (people.getAge() >= fromAge
-                        && people.getAge() <= toAge))
+                .filter(people -> people.getSex() == People.Sex.MAN && people.getAge() >= fromAge
+                        && people.getAge() <= toAge)
                 .collect(Collectors.toList());
     }
 
@@ -108,8 +107,8 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(people -> people.getAge() >= femaleAge && people.getSex()
-                        == People.Sex.WOMEN)
+                .filter(people -> people.getAge() >= femaleAge
+                        && people.getSex() == People.Sex.WOMEN)
                 .map(People::getCatList)
                 .flatMap(Collection::stream)
                 .map(Cat::getName)
