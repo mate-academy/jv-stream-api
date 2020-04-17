@@ -58,10 +58,8 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .boxed()
                 .map(i -> i % 2 == 0 ? numbers.get(i) : numbers.get(i) - 1)
                 .filter(x -> x % 2 != 0)
-                .mapToDouble(Double::valueOf)
                 .average()
                 .orElseThrow();
     }
