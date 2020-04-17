@@ -14,8 +14,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(n -> n % 2 == 1)
-                .mapToInt(Integer::intValue)
-                .sum();
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -110,7 +109,7 @@ public class JavaStreamApi {
      * <p>7. Дано коллекцию List of peoples. Класс People (с полями name — имя, age — возраст,
      * sex — пол, List of Cats -  кошки этого человека).
      * Дано класс Cat (name - имя кошки, age - возраст кошки).
-     * Задача: вивести все имена кошек в которых pхозяева это девушки старше 18 лет</p>
+     * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
 
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
