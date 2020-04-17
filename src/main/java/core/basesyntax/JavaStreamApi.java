@@ -80,10 +80,9 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(x -> x.getAge()
-                        >= fromAge && x.getAge()
-                        <= toAge && x.getSex()
-                        == People.Sex.MAN)
+                .filter(x -> x.getAge() >= fromAge
+                        && x.getAge() <= toAge
+                        && x.getSex() == People.Sex.MAN)
                 .collect(Collectors.toList());
     }
 
@@ -100,10 +99,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(x -> (x.getSex() == People.Sex.MAN && x.getAge()
-                        >= fromAge && x.getAge() <= maleToAge)
-                        || (x.getSex() == People.Sex.WOMEN && x.getAge()
-                        >= fromAge && x.getAge() <= femaleToAge))
+                .filter(x -> (x.getSex() == People.Sex.MAN
+                        && x.getAge() >= fromAge
+                        && x.getAge() <= maleToAge) || (x.getSex() == People.Sex.WOMEN
+                        && x.getAge() >= fromAge
+                        && x.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
