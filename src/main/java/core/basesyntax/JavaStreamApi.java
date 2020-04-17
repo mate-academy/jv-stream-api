@@ -50,7 +50,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(x -> x.contains(element))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -111,8 +111,7 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
 
         return peopleList.stream()
-                .filter(x -> x.getSex() == People.Sex.WOMEN)
-                .filter(x -> x.getAge() > femaleAge)
+                .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() > femaleAge)
                 .flatMap(x -> x.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
