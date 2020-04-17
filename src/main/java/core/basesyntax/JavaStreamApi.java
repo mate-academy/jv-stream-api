@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,7 +12,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().filter(x -> x % 2 == 1).mapToInt(Integer::intValue).sum();
+        return numbers.stream()
+                .filter(x -> x % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -22,7 +23,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(e -> e.contains(element)).count();
+        return elements.stream()
+                .filter(e -> e.contains(element))
+                .count();
     }
 
     /**
@@ -31,7 +34,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -40,8 +44,9 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return elements.stream().filter(x -> x.equals(element))
-                .findAny().orElseThrow(() -> new NoSuchElementException());
+        return elements.stream()
+                .filter(x -> x.equals(element))
+                .findAny().orElseThrow();
     }
 
     /**
@@ -54,7 +59,7 @@ public class JavaStreamApi {
         return IntStream.range(0, numbers.size())
                 .map((x) -> x % 2 == 1 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> x % 2 == 1).average()
-                .orElseThrow(() -> new NoSuchElementException());
+                .orElseThrow();
     }
 
     /**
@@ -102,7 +107,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(x -> x.getAge() >= femaleAge && x.getSex().equals(People.Sex.WOMEN))
                 .map(x -> x.getCatList())
-                .flatMap(x -> x.stream().map(cats -> cats.getName()))
+                .flatMap(x -> x.stream().map(Cat::getName))
                 .collect(Collectors.toList());
     }
 }
