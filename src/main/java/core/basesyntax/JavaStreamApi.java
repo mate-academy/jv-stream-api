@@ -12,7 +12,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().filter(x -> x % 2 != 0).reduce(0, Integer::sum);
+        return numbers.stream()
+                .filter(x -> x % 2 != 0)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -21,7 +23,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(e -> e.equals(element)).count();
+        return elements.stream()
+                .filter(e -> e.equals(element))
+                .count();
     }
 
     /**
@@ -30,7 +34,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -39,7 +44,10 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return elements.stream().filter(e -> e.equals(element)).findAny().orElseThrow();
+        return elements.stream()
+                .filter(e -> e.equals(element))
+                .findAny()
+                .orElseThrow();
     }
 
     /**
