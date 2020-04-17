@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,7 +46,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(x -> x.equals(element))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException());
+                .orElseThrow();
     }
 
     /**
@@ -57,12 +56,11 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return IntStream.iterate(0, x -> x + 1)
-                .limit(numbers.size())
+        return IntStream.range(0, numbers.size())
                 .mapToDouble(x -> (x % 2 == 0) ? numbers.get(x) : numbers.get(x) - 1)
                 .filter(x -> x % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -93,9 +91,9 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(x -> x.getAge() >= fromAge)
-                .filter(x -> x.getSex().equals(People.Sex.WOMEN) && x.getAge() <= femaleToAge
-                        || x.getSex().equals(People.Sex.MAN) && x.getAge() <= maleToAge)
+                .filter(x -> x.getAge() >= fromAge
+                        && (x.getSex().equals(People.Sex.WOMEN) && x.getAge() <= femaleToAge
+                            || x.getSex().equals(People.Sex.MAN) && x.getAge() <= maleToAge))
                 .collect(Collectors.toList());
     }
 
