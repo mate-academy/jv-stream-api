@@ -16,7 +16,7 @@ public class JavaStreamApi {
         return numbers.stream()
                 .filter(i -> i % 2 != 0)
                 .mapToInt(Integer::intValue)
-                .sum();
+                .reduce(0, Integer::sum);
     }
 
     /**
