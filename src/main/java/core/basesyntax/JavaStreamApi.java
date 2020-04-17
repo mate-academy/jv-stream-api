@@ -12,10 +12,9 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return IntStream.range(0, numbers.size())
-                .map(numbers::get)
+        return numbers.stream()
                 .filter(x -> x % 2 != 0)
-                .sum();
+                .reduce(Integer::sum).orElse(0);
     }
 
     /**
