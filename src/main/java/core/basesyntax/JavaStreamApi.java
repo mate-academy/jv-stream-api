@@ -25,8 +25,6 @@ public class JavaStreamApi {
     }
 
     public String findElement(List<String> elements, String element) {
-        //if (!elements.stream().anyMatch(x -> x.equals(element)))
-        // throw new NoSuchElementException();
         return elements.stream()
                 .filter(s -> s.equals(element))
                 .findAny()
