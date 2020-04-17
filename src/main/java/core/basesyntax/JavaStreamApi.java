@@ -49,7 +49,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(e -> e.equals(element))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -59,11 +59,10 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return IntStream
-                .range(0, numbers.size())
+        return IntStream.range(0, numbers.size())
                 .map(i -> i % 2 != 0 ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(n -> n % 2 != 0).average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
 
     }
 
@@ -94,7 +93,8 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return peopleList.stream().filter(p -> (p.getAge() > fromAge && p.getAge() <= femaleToAge
+        return peopleList.stream()
+                .filter(p -> (p.getAge() > fromAge && p.getAge() <= femaleToAge
                 && p.getSex() == People.Sex.WOMEN) || (p.getAge() > fromAge
                 && p.getAge() < maleToAge
                 && p.getSex() == People.Sex.MAN))
