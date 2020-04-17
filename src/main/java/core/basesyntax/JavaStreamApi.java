@@ -24,7 +24,7 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .filter(string -> string.contains(element))
+                .filter(string -> string.equals(element))
                 .count();
     }
 
