@@ -60,7 +60,7 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return IntStream.iterate(0, i -> i + 1).limit(numbers.size())
+        return IntStream.range(0,numbers.size())
                 .map(i -> i % 2 == 1 ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(i -> i % 2 == 1)
                 .average()
