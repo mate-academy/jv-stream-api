@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,10 +15,9 @@ public class JavaStreamApi {
 
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
-                .flatMapToInt(IntStream::of)
                 .filter(Objects::nonNull)
                 .filter(num -> num % 2 != 0)
-                .sum();
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -39,7 +37,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -51,7 +50,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(elm -> elm.equals(element))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -62,20 +61,12 @@ public class JavaStreamApi {
      **/
 
     public Double averageSumOdd(List<Integer> numbers) {
-        List<Integer> finalNumbers = numbers;
-        numbers = IntStream
+        return IntStream
                 .range(0, numbers.size())
-                .map(i -> i % 2 != 0 ? finalNumbers.get(i) - 1 : finalNumbers.get(i))
-                .boxed()
-                .collect(Collectors.toList());
-        Double result = numbers.stream().filter(i -> i % 2 != 0)
-                .collect(Collectors.summarizingInt(i -> i)).getAverage();
-
-        Optional<Double> optionalResult = Optional.of(result);
-        if (optionalResult.get() == 0.0) {
-            throw new NoSuchElementException();
-        }
-        return optionalResult.orElseThrow(NoSuchElementException::new);
+                .map(i -> i % 2 != 0 ? numbers.get(i) - 1 : numbers.get(i))
+                .filter(x -> x % 2 == 1)
+                .average()
+                .orElseThrow();
     }
 
     /**
@@ -106,10 +97,8 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(age -> (age.getSex().equals(People.Sex.MAN)
-                        && (age.getAge() > fromAge && age.getAge() < maleToAge))
-                        || (age.getSex().equals(People.Sex.WOMEN)
-                        && (age.getAge() > fromAge && age.getAge() <= femaleToAge)))
+                .filter(age -> (age.getAge() > fromAge && (age.getAge() < maleToAge
+                        || age.getAge() < fromAge)))
                 .collect(Collectors.toList());
     }
 
