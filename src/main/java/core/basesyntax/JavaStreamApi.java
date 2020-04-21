@@ -14,7 +14,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 == 1)
-                .reduce(0, (sum, x) -> sum + x);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -74,9 +74,8 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(p -> p.getAge() >= fromAge)
-                .filter(p -> p.getAge() <= toAge)
-                .filter(p -> p.getSex() == People.Sex.MAN)
+                .filter(p -> p.getAge() >= fromAge && p.getAge() <= toAge
+                        && p.getSex() == People.Sex.MAN)
                 .collect(Collectors.toList());
     }
 
@@ -93,9 +92,10 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(p -> p.getAge() >= fromAge)
-                .filter(p -> p.getSex() == People.Sex.WOMEN && p.getAge() <= femaleToAge
-                        || p.getSex() == People.Sex.MAN && p.getAge() <= maleToAge)
+                .filter(p -> p.getSex() == People.Sex.WOMEN
+                        && p.getAge() <= femaleToAge && p.getAge() >= fromAge
+                        || p.getSex() == People.Sex.MAN
+                        && p.getAge() <= maleToAge && p.getAge() >= fromAge)
                 .collect(Collectors.toList());
     }
 
@@ -107,8 +107,8 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(people -> people.getAge() >= femaleAge)
-                .filter(people -> people.getSex().equals(People.Sex.WOMEN))
+                .filter(people -> people.getAge() >= femaleAge
+                        && people.getSex().equals(People.Sex.WOMEN))
                 .flatMap(people -> people.getCatList().stream())
                 .map(cat -> cat.getName())
                 .collect(Collectors.toList());
