@@ -45,8 +45,10 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return elements.stream().filter(element::equals)
-                .findFirst().orElseThrow();
+        return elements.stream()
+                .filter(element::equals)
+                .findFirst()
+                .orElseThrow();
     }
 
     /**
@@ -57,7 +59,7 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .mapToDouble(n -> n % 2 == 1 ? numbers.get(n) - 1 : numbers.get(n))
+                .map(n -> n % 2 == 1 ? numbers.get(n) - 1 : numbers.get(n))
                 .filter(i -> i % 2 == 1)
                 .average()
                 .orElseThrow();
@@ -90,9 +92,10 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return peopleList.stream().filter(p -> p.getAge() >= fromAge
-                && ((p.getSex() == People.Sex.MAN)
-                ? p.getAge() <= maleToAge : p.getAge() <= femaleToAge))
+        return peopleList.stream()
+                .filter(p -> p.getAge() >= fromAge
+                        && ((p.getSex() == People.Sex.MAN)
+                        ? p.getAge() <= maleToAge : p.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -103,8 +106,9 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        return peopleList.stream().filter(p -> p.getSex() == People.Sex.WOMEN
-                && p.getAge() > femaleAge)
+        return peopleList.stream()
+                .filter(p -> p.getSex() == People.Sex.WOMEN
+                        && p.getAge() > femaleAge)
                 .flatMap(p -> p.getCatList().stream().map(Cat::getName))
                 .collect(Collectors.toList());
     }
