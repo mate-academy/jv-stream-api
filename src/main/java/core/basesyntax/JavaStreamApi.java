@@ -13,7 +13,10 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().mapToInt(x -> (x % 2) != 0 ? x : 0).sum();
+        return numbers.stream()
+                .filter(n -> n % 2 != 0)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     /**
@@ -22,7 +25,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(x -> x.equals(element)).count();
+        return elements.stream()
+                .filter(x -> x.equals(element))
+                .count();
     }
 
     /**
@@ -31,7 +36,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -42,7 +48,7 @@ public class JavaStreamApi {
     public String findElement(List<String> elements, String element) {
         return elements.stream().filter(x -> x.equals(element))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -53,7 +59,7 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .mapToDouble(x -> (x % 2) != 0 ? numbers.get(x) - 1 : numbers.get(x))
+                .map(x -> (x % 2) != 0 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> x % 2 != 0)
                 .average()
                 .orElseThrow(NoSuchElementException::new);
@@ -69,8 +75,9 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(p -> p.getSex() == People.Sex.MAN)
-                .filter(p -> p.getAge() >= fromAge && p.getAge() <= toAge)
+                .filter(p -> p.getSex() == People.Sex.MAN
+                        && p.getAge() >= fromAge
+                        && p.getAge() <= toAge)
                 .collect(Collectors.toList());
     }
 
@@ -102,8 +109,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(x -> x.getSex().equals(People.Sex.WOMEN))
-                .filter(x -> x.getAge() >= femaleAge)
+                .filter(x -> x.getSex().equals(People.Sex.WOMEN) && x.getAge() >= femaleAge)
                 .flatMap(x -> x.getCatList().stream().map(Cat::getName))
                 .collect(Collectors.toList());
     }
