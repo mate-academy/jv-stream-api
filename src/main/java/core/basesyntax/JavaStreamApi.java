@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,8 +14,7 @@ public class JavaStreamApi {
 
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
-                .filter(Objects::nonNull)
-                .filter(num -> num % 2 != 0)
+                .filter(num -> num != null && num % 2 != 0)
                 .reduce(0, Integer::sum);
     }
 
