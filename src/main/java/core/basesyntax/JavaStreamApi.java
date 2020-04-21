@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,12 +46,12 @@ public class JavaStreamApi {
      * (пример: Arrays.asList(«a1», «a2», «a3», «a1»)).
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
-    public String findElement(List<String> elements, String element) throws NoSuchElementException {
+    public String findElement(List<String> elements, String element) {
 
         return elements.stream()
                 .filter(element::equals)
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -63,15 +62,11 @@ public class JavaStreamApi {
      **/
     public Double averageSumOdd(List<Integer> numbers) {
 
-        IntStream.range(0,numbers.size())
-                .filter(i -> i % 2 != 0)
-                .forEach(index -> numbers.set(index, numbers.get(index) - 1));
-
-        return numbers.stream()
-                .filter(i -> i % 2 != 0)
-                .mapToInt(Integer::intValue)
+        return IntStream.range(0,numbers.size())
+                .mapToDouble(x -> x % 2 == 1 ? numbers.get(x) - 1 : numbers.get(x))
+                .filter(x -> x % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
