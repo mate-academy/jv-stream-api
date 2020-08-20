@@ -58,12 +58,11 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
 
-    // IMPROVE THIS
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream
                 .range(0, numbers.size())
-                .filter(i -> numbers.get(i) % 2 == 1)
-                .map(i -> i - 1)
+                .map(index -> index % 2 != 0 ? numbers.get(index) - 1 : numbers.get(index))
+                .filter(number -> number % 2 != 0)
                 .average()
                 .orElseThrow();
     }
