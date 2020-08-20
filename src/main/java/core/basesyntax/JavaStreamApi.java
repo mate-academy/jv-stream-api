@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -49,7 +48,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(value -> value.equals(element))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -63,7 +62,7 @@ public class JavaStreamApi {
                 .map(index -> index % 2 != 0 ? numbers.get(index) - 1 : numbers.get(index))
                 .filter(number -> number % 2 != 0)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -76,7 +75,7 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(man -> man.getAge() > fromAge && man.getAge() < toAge
+                .filter(man -> man.getAge() >= fromAge && man.getAge() <= toAge
                         && man.getSex().equals(People.Sex.MAN))
                 .collect(Collectors.toList());
     }
@@ -94,10 +93,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(workable -> (workable.getSex().equals(People.Sex.MAN)
-                        && workable.getAge() > fromAge && workable.getAge() < maleToAge)
+                .filter(workable -> workable.getAge() >= fromAge
+                        && (workable.getSex().equals(People.Sex.MAN)
+                        && workable.getAge() <= maleToAge)
                         || (workable.getSex().equals(People.Sex.WOMEN)
-                        && workable.getAge() > fromAge && workable.getAge() <= femaleToAge))
+                        && workable.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -109,7 +109,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(owner -> owner.getAge() > femaleAge
+                .filter(owner -> owner.getAge() >= femaleAge
                         && owner.getSex().equals(People.Sex.WOMEN))
                 .flatMap(cat -> cat.getCatList().stream().map(Cat::getName))
                 .collect(Collectors.toList());
