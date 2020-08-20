@@ -15,8 +15,7 @@ public class JavaStreamApi {
 
         return numbers.stream()
                 .filter(x -> x % 2 == 1)
-                .reduce((a, b) -> a + b)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -26,7 +25,7 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .filter(element::equals)
+                .filter(x -> x.equals(element))
                 .count();
     }
 
@@ -107,8 +106,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(x -> x.getAge() >= femaleAge && x.getSex() == People.Sex.WOMEN
-                                                    && x.getCatList().size() > 0)
+                .filter(x -> x.getAge() >= femaleAge && x.getSex() == People.Sex.WOMEN)
                 .flatMap(x -> x.getCatList().stream())
                 .map(x -> x.getName())
                 .collect(Collectors.toList());
