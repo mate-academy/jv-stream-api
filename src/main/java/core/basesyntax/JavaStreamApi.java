@@ -36,7 +36,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
