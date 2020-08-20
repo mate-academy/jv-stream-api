@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -26,7 +25,7 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .filter(string -> string.contains(element))
+                .filter(string -> string.equals(element))
                 .count();
     }
 
@@ -48,7 +47,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(string -> string.equals(element))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -67,7 +66,7 @@ public class JavaStreamApi {
                         .map(numbers::get))
                 .filter(number -> number % 2 != 0)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -121,7 +120,6 @@ public class JavaStreamApi {
                         person.getSex().equals(People.Sex.WOMEN)
                         && person.getAge() > femaleAge)
                 .flatMap(person -> person.getCatList().stream())
-                .collect(Collectors.toList()).stream()
                 .map(Cat::getName)
                 .collect(Collectors.toList());
     }
