@@ -1,17 +1,20 @@
 package core.basesyntax;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
-
     /**
      * <p>1. Дано: List of Integer numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return null;
+        return numbers.stream()
+                .filter(num -> num % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -20,7 +23,8 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return null;
+        return elements.stream()
+                .filter(listElement -> listElement.equals(element)).count();
     }
 
     /**
@@ -29,7 +33,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return null;
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -38,7 +43,11 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return null;
+
+        return elements.stream()
+                .filter(listElement -> listElement.equals(element))
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -46,9 +55,15 @@ public class JavaStreamApi {
      * Отнимите от каждого элемента, который стоит на непарной позиции (имеет не парный индекс) 1
      * и верните среднее арифметическое всех нечетных чисел или киньте ошибку
      * NoSuchElementException</p>
-     **/
-    public Double averageSumOdd(List<Integer> numbers) {
-        return null;
+     *
+     * @return
+     */
+    public double averageSumOdd(List<Integer> numbers) {
+        return IntStream.range(0, numbers.size())
+                .map(changedOdd -> numbers.get(changedOdd) - changedOdd % 2)
+                .filter(odd -> odd % 2 > 0)
+                .average()
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -60,7 +75,10 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(person -> person.getSex() == People.Sex.MAN)
+                .filter(person -> person.getAge() >= fromAge && person.getAge() <= toAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -75,7 +93,12 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(person -> person.getAge() >= fromAge)
+                .filter(person -> (person.getSex() == People.Sex.WOMEN
+                        && person.getAge() <= femaleToAge)
+                        || (person.getSex() == People.Sex.MAN && person.getAge() <= maleToAge))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -85,6 +108,10 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(women -> women.getSex() == People.Sex.WOMEN && women.getAge() >= femaleAge)
+                .flatMap(person -> person.getCatList().stream())
+                .map(Cat::getName)
+                .collect(Collectors.toList());
     }
 }
