@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -48,8 +47,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(s -> s.equals(element))
                 .findFirst()
-                .map(String::valueOf)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -63,7 +61,7 @@ public class JavaStreamApi {
                 .mapToDouble(i -> i % 2 == 1 ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(n -> n % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -77,7 +75,7 @@ public class JavaStreamApi {
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
                 .filter(p -> p.getSex().equals(People.Sex.MAN)
-                        && (p.getAge() < toAge && p.getAge() > fromAge))
+                        && (p.getAge() <= toAge && p.getAge() >= fromAge))
                 .collect(Collectors.toList());
     }
 
@@ -109,7 +107,7 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
                 .filter(p -> p.getSex().equals(People.Sex.WOMEN)
-                        && p.getAge() > femaleAge)
+                        && p.getAge() >= femaleAge)
                 .flatMap(p -> p.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
