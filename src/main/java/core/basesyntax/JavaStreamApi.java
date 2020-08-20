@@ -2,35 +2,36 @@ package core.basesyntax;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JavaStreamApi {
 
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().filter(number -> number % 2 == 1).mapToInt(Integer::intValue).sum();
+        return numbers.stream()
+                .filter(number -> number % 2 == 1)
+                .reduce(0, (x, y) -> x + y);
     }
 
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(s -> s.equals(element)).count();
+        return elements.stream()
+                .filter(s -> s.equals(element))
+                .count();
     }
 
     public Optional<String> firstElement(List<String> elements) {
-        return elements.isEmpty() ? Optional.empty() : Optional.ofNullable(elements.get(0));
+        return elements.stream()
+                .findFirst();
     }
 
     public String findElement(List<String> elements, String element) {
-        if (elements.indexOf(element) == -1) {
-            throw new NoSuchElementException();
-        }
-        return element;
+        return elements.stream()
+                .filter(x -> x.equals(element))
+                .findFirst()
+                .orElseThrow();
     }
 
     public Double averageSumOdd(List<Integer> numbers) {
-        if (numbers.isEmpty()) {
-            throw new NoSuchElementException();
-        }
         int[] index = {0};
         return numbers.stream()
                 .mapToInt(x -> index[0]++ % 2 == 1 ? x - 1 : x)
@@ -54,16 +55,12 @@ public class JavaStreamApi {
         if (peopleList.isEmpty()) {
             return Collections.emptyList();
         }
-        return peopleList.stream().filter(people -> {
-            if (people.getSex().equals(People.Sex.MAN)
-                    && people.getAge() >= fromAge
-                    && people.getAge() <= maleToAge) {
-                return true;
-            }
-            return people.getSex().equals(People.Sex.WOMEN)
-                    && people.getAge() >= fromAge
-                    && people.getAge() <= femaleToAge;
-        }).collect(Collectors.toList());
+        return peopleList.stream().filter(people -> people.getAge() >= fromAge
+                && (people.getSex().equals(People.Sex.MAN)
+                && people.getAge() <= maleToAge)
+                || (people.getSex().equals(People.Sex.WOMEN)
+                && people.getAge() <= femaleToAge))
+                .collect(Collectors.toList());
     }
 
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
