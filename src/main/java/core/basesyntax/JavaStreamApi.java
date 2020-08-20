@@ -15,8 +15,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(i -> i % 2 == 1)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -49,7 +48,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(elem -> elem.equals(element))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -63,7 +62,7 @@ public class JavaStreamApi {
                 .map(number -> number % 2 == 1 ? numbers.get(number) - 1 : numbers.get(number))
                 .filter(num -> num % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -107,7 +106,7 @@ public class JavaStreamApi {
      * <p>7. Дано коллекцию List of peoples. Класс People (с полями name — имя, age — возраст,
      * sex — пол, List of Cats -  кошки этого человека).
      * Дано класс Cat (name - имя кошки, age - возраст кошки).
-     * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
+     * Задача: вывести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
