@@ -48,7 +48,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(element::equals)
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
