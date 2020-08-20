@@ -93,8 +93,10 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(x -> x.getAge() >= fromAge && (x.getSex() == People.Sex.MAN
-                                        ? x.getAge() <= maleToAge : x.getAge() <= femaleToAge))
+                .filter(x -> x.getAge() >= fromAge
+                                        && (x.getSex() == People.Sex.MAN
+                                        ? x.getAge() <= maleToAge
+                                        : x.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -108,7 +110,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(x -> x.getAge() >= femaleAge && x.getSex() == People.Sex.WOMEN)
                 .flatMap(x -> x.getCatList().stream())
-                .map(x -> x.getName())
+                .map(Cat::getName)
                 .collect(Collectors.toList());
     }
 }
