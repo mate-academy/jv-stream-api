@@ -13,9 +13,9 @@ public class JavaStreamApi {
      **/
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
-                .mapToInt(number -> number)
                 .filter(number -> number % 2 != 0)
-                .sum();
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     /**
