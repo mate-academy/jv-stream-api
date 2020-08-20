@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,7 +15,8 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 != 0)
-                .reduce(Integer::sum).orElse(0);
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     /**
@@ -47,7 +49,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(element::equals)
                 .findFirst()
-                .get();
+                .orElseThrow();
     }
 
     /**
@@ -110,7 +112,8 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() >= femaleAge
                         && x.getCatList() != null)
-                .flatMap(x -> x.getCatList().stream())
+                .map(People::getCatList)
+                .flatMap(Collection::stream)
                 .map(Cat::getName)
                 .collect(Collectors.toList());
     }
