@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -77,8 +76,8 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(person -> person.getSex() == People.Sex.MAN)
-                .filter(person -> person.getAge() >= fromAge && person.getAge() <= toAge)
+                .filter(person -> person.getSex() == People.Sex.MAN
+                        && person.getAge() >= fromAge && person.getAge() <= toAge)
                 .collect(Collectors.toList());
     }
 
@@ -95,10 +94,9 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(person -> person.getAge() >= fromAge)
-                .filter(person -> (person.getSex() == People.Sex.WOMEN
-                        && person.getAge() <= femaleToAge)
-                        || (person.getSex() == People.Sex.MAN && person.getAge() <= maleToAge))
+                .filter(person -> person.getAge() >= fromAge
+                        && (person.getSex() == People.Sex.WOMEN ? person.getAge() <= femaleToAge
+                        : person.getAge() <= maleToAge))
                 .collect(Collectors.toList());
     }
 
