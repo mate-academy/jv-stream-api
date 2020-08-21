@@ -24,7 +24,8 @@ public class JavaStreamApi {
      **/
     public Long elementCount(List<String> elements, String element) {
         return elements.stream()
-                .filter(listElement -> listElement.equals(element)).count();
+                .filter(listElement -> listElement.equals(element))
+                .count();
     }
 
     /**
@@ -47,7 +48,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(listElement -> listElement.equals(element))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -63,7 +64,7 @@ public class JavaStreamApi {
                 .map(changedOdd -> numbers.get(changedOdd) - changedOdd % 2)
                 .filter(odd -> odd % 2 > 0)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
