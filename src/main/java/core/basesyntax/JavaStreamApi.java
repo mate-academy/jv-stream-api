@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
 
@@ -32,9 +33,8 @@ public class JavaStreamApi {
     }
 
     public Double averageSumOdd(List<Integer> numbers) {
-        int[] index = {0};
-        return numbers.stream()
-                .mapToInt(x -> index[0]++ % 2 == 1 ? x - 1 : x)
+        return IntStream.range(0, numbers.size())
+                .map(x -> x % 2 == 1 ? numbers.get(x) - 1 : numbers.get(x))
                 .filter(x -> x % 2 == 1)
                 .average()
                 .orElseThrow();
