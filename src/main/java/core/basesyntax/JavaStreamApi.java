@@ -57,13 +57,8 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return IntStream.concat(
-                IntStream.range(0, numbers.size())
-                        .filter(i -> i % 2 != 0)
-                        .map(i -> numbers.get(i) - 1),
-                IntStream.range(0, numbers.size())
-                        .filter(i -> i % 2 == 0)
-                        .map(numbers::get))
+        return IntStream.range(0, numbers.size())
+                .map(i -> i % 2 != 0 ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(number -> number % 2 != 0)
                 .average()
                 .orElseThrow();
@@ -118,7 +113,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(person ->
                         person.getSex().equals(People.Sex.WOMEN)
-                        && person.getAge() > femaleAge)
+                                && person.getAge() > femaleAge)
                 .flatMap(person -> person.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
