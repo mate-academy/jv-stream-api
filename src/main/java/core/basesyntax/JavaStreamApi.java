@@ -1,17 +1,20 @@
 package core.basesyntax;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
 
     /**
      * <p>1. Дано: List of Integer numbers.
-     * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
+     * Вернуть сумму нечетных чисел или 0, если таких не существует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return null;
+        return numbers.stream().filter(num -> num % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -20,7 +23,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return null;
+        return elements.stream()
+                .filter(arrElement -> arrElement.equals(element))
+                .count();
     }
 
     /**
@@ -29,7 +34,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return null;
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -38,7 +44,9 @@ public class JavaStreamApi {
      * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
      **/
     public String findElement(List<String> elements, String element) {
-        return null;
+        return elements.stream()
+                .filter(arrElement -> arrElement.equals(element))
+                .findAny().orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -48,7 +56,11 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return null;
+        return IntStream.range(0, numbers.size())
+                .map(index -> index % 2 == 1 ? numbers.get(index) - 1 : numbers.get(index))
+                .filter(element -> element % 2 == 1)
+                .average()
+                .orElseThrow(NoSuchElementException::new);
     }
 
     /**
@@ -60,7 +72,10 @@ public class JavaStreamApi {
      * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(people -> people.getSex().equals(People.Sex.MAN)
+                        && people.getAge() >= fromAge && people.getAge() <= toAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -75,7 +90,12 @@ public class JavaStreamApi {
      **/
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(people -> people.getSex().equals(People.Sex.MAN)
+                        && people.getAge() >= fromAge && people.getAge() <= maleToAge
+                        || people.getSex().equals(People.Sex.WOMEN)
+                        && people.getAge() >= fromAge && people.getAge() <= femaleToAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -85,6 +105,11 @@ public class JavaStreamApi {
      * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(people -> people.getAge() > femaleAge
+                        && people.getSex().equals(People.Sex.WOMEN))
+                .flatMap(lists -> lists.getCatList().stream())
+                .map(Cat::getName)
+                .collect(Collectors.toList());
     }
 }
