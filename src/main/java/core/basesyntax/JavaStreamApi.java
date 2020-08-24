@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,8 +14,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 != 0)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -95,10 +93,10 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(x -> (x.getSex() == People.Sex.MAN
-                        && (x.getAge() >= fromAge && x.getAge() <= maleToAge))
-                        || (x.getSex() == People.Sex.WOMEN
-                        && (x.getAge() >= fromAge && x.getAge() <= femaleToAge)))
+                .filter(x -> ((x.getAge() >= fromAge && x.getSex() == People.Sex.MAN)
+                        && x.getAge() <= maleToAge)
+                        || ((x.getAge() >= fromAge && x.getSex() == People.Sex.WOMEN)
+                        && x.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -110,10 +108,8 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() >= femaleAge
-                        && x.getCatList() != null)
-                .map(People::getCatList)
-                .flatMap(Collection::stream)
+                .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() >= femaleAge)
+                .flatMap(x -> x.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
     }
