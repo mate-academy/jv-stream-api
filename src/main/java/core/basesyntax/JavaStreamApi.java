@@ -79,7 +79,7 @@ public class JavaStreamApi {
                 .filter(people -> people.getSex().equals(People.Sex.MAN)
                         && (fromAge <= people.getAge())
                         && (people.getAge() <= toAge))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
     }
 
     /**
@@ -99,7 +99,7 @@ public class JavaStreamApi {
                         && (people.getSex().equals(People.Sex.WOMEN)
                         ? people.getAge() <= femaleToAge
                         : people.getAge() <= maleToAge))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
     }
 
     /**
@@ -114,7 +114,7 @@ public class JavaStreamApi {
                         && people.getAge() > femaleAge))
                 .flatMap(p -> p.getCatList().stream())
                 .map(Cat::getName)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
 
     }
 }
