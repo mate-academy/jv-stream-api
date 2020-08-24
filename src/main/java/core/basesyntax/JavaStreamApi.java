@@ -1,14 +1,9 @@
 package core.basesyntax;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class JavaStreamApi {
 
@@ -66,8 +61,7 @@ public class JavaStreamApi {
      * NoSuchElementException</p>
      **/
     public Double averageSumOdd(List<Integer> numbers) {
-        return IntStream.iterate(0, i -> i + 1)
-                .limit(numbers.size())
+        return IntStream.range(0, numbers.size())
                 .map(i -> i = i % 2 != 0 ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(i -> i % 2 != 0)
                 .average()
@@ -86,9 +80,9 @@ public class JavaStreamApi {
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList
                 .stream()
-                .filter(person -> person.getSex() == People.Sex.MAN)
-                .filter(person -> person.getAge() < toAge)
-                .filter(person -> person.getAge() > fromAge)
+                .filter(person -> person.getSex() == People.Sex.MAN
+                        && person.getAge() <= toAge
+                        && person.getAge() >= fromAge)
                 .collect(Collectors.toList());
     }
 
@@ -106,10 +100,9 @@ public class JavaStreamApi {
                                        int maleToAge, List<People> peopleList) {
         return peopleList
                 .stream()
-                .filter(person -> person.getAge() > fromAge)
-                .filter(person -> person.getSex() == People.Sex.MAN
-                ? (person.getAge() <= maleToAge)
-                : (person.getAge() <= femaleToAge))
+                .filter(person -> person.getAge() > fromAge && (person.getSex() == People.Sex.MAN
+                        ? (person.getAge() <= maleToAge)
+                        : (person.getAge() <= femaleToAge)))
                 .collect(Collectors.toList());
     }
 
@@ -122,7 +115,8 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList
                 .stream()
-                .filter(person -> person.getSex() == People.Sex.WOMEN && person.getAge() > femaleAge)
+                .filter(person -> person.getSex() == People.Sex.WOMEN
+                        && person.getAge() >= femaleAge)
                 .flatMap(person -> person.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
