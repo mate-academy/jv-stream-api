@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -13,7 +12,8 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных чисел или 0, если таких не существует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().filter(num -> num % 2 == 1)
+        return numbers.stream()
+                .filter(num -> num % 2 == 1)
                 .reduce(0, Integer::sum);
     }
 
@@ -46,7 +46,7 @@ public class JavaStreamApi {
     public String findElement(List<String> elements, String element) {
         return elements.stream()
                 .filter(arrElement -> arrElement.equals(element))
-                .findAny().orElseThrow(NoSuchElementException::new);
+                .findAny().orElseThrow();
     }
 
     /**
@@ -60,7 +60,7 @@ public class JavaStreamApi {
                 .map(index -> index % 2 == 1 ? numbers.get(index) - 1 : numbers.get(index))
                 .filter(element -> element % 2 == 1)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -91,10 +91,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.MAN)
-                        && people.getAge() >= fromAge && people.getAge() <= maleToAge
+                .filter(people -> people.getAge() >= fromAge
+                        && people.getSex().equals(People.Sex.MAN)
+                        && people.getAge() <= maleToAge
                         || people.getSex().equals(People.Sex.WOMEN)
-                        && people.getAge() >= fromAge && people.getAge() <= femaleToAge)
+                        && people.getAge() <= femaleToAge)
                 .collect(Collectors.toList());
     }
 
