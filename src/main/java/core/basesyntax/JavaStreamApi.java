@@ -8,19 +8,27 @@ import java.util.stream.IntStream;
 public class JavaStreamApi {
 
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().filter((x) -> x % 2 != 0).reduce(Integer::sum).orElse(0);
+        return numbers.stream()
+                .filter((x) -> x % 2 != 0)
+                .reduce(0,Integer::sum);
     }
 
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(element::equals).count();
+        return elements.stream()
+                .filter(element::equals)
+                .count();
     }
 
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     public String findElement(List<String> elements, String element) {
-        return elements.stream().filter(element::equals).findFirst().get();
+        return elements.stream()
+                .filter(element::equals)
+                .findFirst()
+                .orElseThrow();
     }
 
     public Double averageSumOdd(List<Integer> numbers) {
@@ -33,18 +41,19 @@ public class JavaStreamApi {
 
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter((human) -> human.getSex() == People.Sex.MAN)
-                .filter((man) -> man.getAge() > fromAge && man.getAge() < toAge)
+                .filter((human) -> human.getSex() == People.Sex.MAN
+                        && human.getAge() > fromAge && human.getAge() < toAge)
                 .collect(Collectors.toList());
     }
 
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter((human) -> human.getAge() > fromAge)
-                .filter((human) -> human.getSex() == People.Sex.WOMEN
+                .filter((human) -> human.getAge() > fromAge
+                        && (human.getSex() == People.Sex.WOMEN
                         && human.getAge() <= femaleToAge
-                        || human.getSex() == People.Sex.MAN && human.getAge() <= maleToAge)
+                        || human.getSex() == People.Sex.MAN
+                        && human.getAge() <= maleToAge))
                 .collect(Collectors.toList());
     }
 
