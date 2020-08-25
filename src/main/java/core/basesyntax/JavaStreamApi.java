@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,7 +13,8 @@ public class JavaStreamApi {
      **/
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
-                .mapToInt((n) -> n % 2 == 1 ? n : 0).sum();
+                .filter((n) -> n % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -47,7 +47,7 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(element::equals)
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -92,10 +92,9 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(p -> p.getAge() >= fromAge
-                        && p.getSex() == People.Sex.MAN && p.getAge() <= maleToAge
-                        || p.getAge() >= fromAge
-                        && p.getSex() == People.Sex.WOMEN && p.getAge() <= femaleToAge)
+                .filter(p -> p.getAge() >= fromAge)
+                .filter(p -> p.getSex() == People.Sex.MAN && p.getAge() <= maleToAge
+                        || p.getSex() == People.Sex.WOMEN && p.getAge() <= femaleToAge)
                 .collect(Collectors.toList());
     }
 
