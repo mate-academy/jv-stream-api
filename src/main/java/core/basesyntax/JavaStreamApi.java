@@ -14,8 +14,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(i -> i % 2 != 0)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -75,7 +74,7 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(p -> p.getSex().equals(People.Sex.MAN)
+                .filter(p -> p.getSex() == People.Sex.MAN
                         && (p.getAge() <= toAge && p.getAge() >= fromAge))
                 .collect(Collectors.toList());
     }
