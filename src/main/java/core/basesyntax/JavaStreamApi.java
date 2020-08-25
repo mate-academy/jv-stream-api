@@ -34,7 +34,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -104,7 +105,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() > femaleAge)
+                .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() >= femaleAge)
                 .flatMap(x -> x.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
