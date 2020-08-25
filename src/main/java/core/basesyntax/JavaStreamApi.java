@@ -101,9 +101,11 @@ public class JavaStreamApi {
                                        int maleToAge, List<People> peopleList) {
         return peopleList
                 .stream()
-                .filter(person -> person.getSex() == People.Sex.WOMEN
-                        ? person.getAge() >= fromAge && person.getAge() <= femaleToAge
-                        : person.getAge() >= fromAge && person.getAge() <= maleToAge)
+                .filter(person -> person.getAge() >= fromAge
+                        && person.getSex() == People.Sex.MAN
+                        && person.getAge() <= maleToAge
+                        || person.getSex() == People.Sex.WOMEN
+                        && person.getAge() <= femaleToAge)
                 .collect(Collectors.toList());
     }
 
