@@ -13,9 +13,8 @@ public class JavaStreamApi {
      **/
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
-                .mapToInt(Integer::intValue)
                 .filter(i -> i % 2 == 1)
-                .sum();
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -76,8 +75,9 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(p -> p.getSex() == People.Sex.MAN)
-                .filter(p -> p.getAge() >= fromAge && p.getAge() <= toAge)
+                .filter(p -> p.getSex() == People.Sex.MAN
+                        && p.getAge() >= fromAge
+                        && p.getAge() <= toAge)
                 .collect(Collectors.toList());
     }
 
@@ -94,10 +94,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(p -> p.getAge() > fromAge)
-                .filter(p -> p.getSex() == People.Sex.MAN
-                        ? p.getAge() <= maleToAge
-                        : p.getAge() <= femaleToAge)
+                .filter(p -> p.getAge() > fromAge
+                    && (p.getSex() == People.Sex.MAN
+                    && p.getAge() <= maleToAge
+                    || p.getSex() == People.Sex.WOMEN
+                    && p.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -110,7 +111,7 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
                 .filter(p -> p.getSex() == People.Sex.WOMEN
-                        && p.getAge() > femaleAge)
+                        && p.getAge() >= femaleAge)
                 .flatMap(p -> p.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
