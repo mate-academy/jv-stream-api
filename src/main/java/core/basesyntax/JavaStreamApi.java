@@ -73,7 +73,7 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.MAN)
+                .filter(people -> people.getSex() == People.Sex.MAN
                         && people.getAge() >= fromAge && people.getAge() <= toAge)
                 .collect(Collectors.toList());
     }
@@ -92,9 +92,9 @@ public class JavaStreamApi {
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
                 .filter(people -> people.getAge() >= fromAge
-                        && people.getSex().equals(People.Sex.MAN)
+                        && people.getSex() == People.Sex.MAN
                         && people.getAge() <= maleToAge
-                        || people.getSex().equals(People.Sex.WOMEN)
+                        || people.getSex() == People.Sex.WOMEN
                         && people.getAge() <= femaleToAge)
                 .collect(Collectors.toList());
     }
@@ -108,7 +108,7 @@ public class JavaStreamApi {
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
                 .filter(people -> people.getAge() > femaleAge
-                        && people.getSex().equals(People.Sex.WOMEN))
+                        && people.getSex() == People.Sex.WOMEN)
                 .flatMap(lists -> lists.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
