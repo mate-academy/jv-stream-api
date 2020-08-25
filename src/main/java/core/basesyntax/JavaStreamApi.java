@@ -10,7 +10,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(number -> number % 2 != 0)
-                .reduce(0,Integer::sum);
+                .reduce(0, Integer::sum);
     }
 
     public Long elementCount(List<String> elements, String element) {
@@ -41,7 +41,7 @@ public class JavaStreamApi {
 
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.MAN)
+                .filter(people -> people.getSex() == People.Sex.MAN
                         && people.getAge() >= fromAge
                         && people.getAge() <= toAge)
                 .collect(Collectors.toList());
@@ -50,9 +50,9 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.WOMEN)
-                        ? people.getAge() >= fromAge && people.getAge() <= femaleToAge
-                        : people.getAge() >= fromAge && people.getAge() <= maleToAge)
+                .filter(x -> x.getAge() >= fromAge
+                && ((x.getSex() == People.Sex.WOMEN && x.getAge() <= femaleToAge)
+                || (x.getSex() == People.Sex.MAN && x.getAge() <= maleToAge)))
                 .collect(Collectors.toList());
     }
 
