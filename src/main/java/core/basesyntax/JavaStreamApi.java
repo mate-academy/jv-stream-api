@@ -24,8 +24,7 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements
-                .stream()
+        return elements.stream()
                 .filter(x -> x.equals(element))
                 .count();
     }
