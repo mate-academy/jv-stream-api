@@ -50,7 +50,7 @@ public class JavaStreamApi {
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
                 .filter(x -> x.getAge() >= fromAge
-                        && (x.getSex() == x.getSex().MAN
+                        && (x.getSex() == People.getSex().MAN
                         && x.getAge() <= maleToAge
                         || x.getSex() == x.getSex().WOMEN && x.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
