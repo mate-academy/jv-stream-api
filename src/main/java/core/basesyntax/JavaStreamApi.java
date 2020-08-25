@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class JavaStreamApi {
-
     /**
      * <p>1. Дано: List of Integer numbers.
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
@@ -14,7 +13,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 != 0)
-                .reduce(0,Integer::sum);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -93,8 +92,12 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(p -> p.getAge() >= fromAge && p.getAge() <= maleToAge
-                        || p.getAge() <= femaleToAge && p.getSex() == People.Sex.WOMEN)
+                .filter(p -> p.getAge() >= fromAge
+                        && p.getAge() <= maleToAge
+                        && p.getSex() == People.Sex.MAN
+                        || p.getAge() >= fromAge
+                        && p.getAge() <= femaleToAge
+                        && p.getSex() == People.Sex.WOMEN)
                 .collect(Collectors.toList());
     }
 
