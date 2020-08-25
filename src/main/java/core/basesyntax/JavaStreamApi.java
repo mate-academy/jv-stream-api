@@ -10,7 +10,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter((x) -> x % 2 != 0)
-                .reduce(0,Integer::sum);
+                .reduce(0, Integer::sum);
     }
 
     public Long elementCount(List<String> elements, String element) {
@@ -33,7 +33,7 @@ public class JavaStreamApi {
 
     public Double averageSumOdd(List<Integer> numbers) {
         return IntStream.range(0, numbers.size())
-                .map((index) -> index % 2 != 0 ? numbers.get(index) - 1 : numbers.get(index))
+                .map(index -> index % 2 != 0 ? numbers.get(index) - 1 : numbers.get(index))
                 .filter(number -> number % 2 != 0)
                 .average()
                 .orElseThrow();
@@ -41,15 +41,15 @@ public class JavaStreamApi {
 
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter((human) -> human.getSex() == People.Sex.MAN
-                        && human.getAge() > fromAge && human.getAge() < toAge)
+                .filter(human -> human.getSex() == People.Sex.MAN
+                        && human.getAge() >= fromAge && human.getAge() <= toAge)
                 .collect(Collectors.toList());
     }
 
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter((human) -> human.getAge() > fromAge
+                .filter(human -> human.getAge() > fromAge
                         && (human.getSex() == People.Sex.WOMEN
                         && human.getAge() <= femaleToAge
                         || human.getSex() == People.Sex.MAN
@@ -59,8 +59,8 @@ public class JavaStreamApi {
 
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter((girl) -> girl.getSex() == People.Sex.WOMEN && girl.getAge() > femaleAge)
-                .flatMap((girl) -> girl.getCatList().stream())
+                .filter(girl -> girl.getSex() == People.Sex.WOMEN && girl.getAge() > femaleAge)
+                .flatMap(girl -> girl.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
     }
