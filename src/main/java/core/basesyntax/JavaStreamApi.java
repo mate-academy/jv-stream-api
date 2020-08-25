@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,8 +14,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 == 1)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -48,7 +46,8 @@ public class JavaStreamApi {
     public String findElement(List<String> elements, String element) {
         return elements.stream()
                 .filter(element::equals)
-                .findAny().orElseThrow(NoSuchElementException::new);
+                .findAny()
+                .orElseThrow();
     }
 
     /**
@@ -94,10 +93,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter((p) -> p.getAge() >= fromAge)
-                .filter((p) -> (p.getSex() == People.Sex.WOMEN
-                        && p.getAge() <= femaleToAge)
-                        || (p.getSex() == People.Sex.MAN && p.getAge() < maleToAge))
+              .filter(p -> p.getAge() > fromAge
+                    && (p.getSex() == People.Sex.MAN
+                    && p.getAge() <= maleToAge
+                    || p.getSex() == People.Sex.WOMEN
+                    && p.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -113,7 +113,7 @@ public class JavaStreamApi {
                         && p.getAge() > femaleAge)
                 .map(People::getCatList)
                 .flatMap((cats) -> cats.stream()
-                        .map(Cat::getName))
+                .map(Cat::getName))
                 .collect(Collectors.toList());
     }
 }
