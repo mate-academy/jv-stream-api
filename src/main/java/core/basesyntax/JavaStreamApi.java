@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -94,9 +93,9 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(person -> person.getAge() >= fromAge
-                        && ((person.getSex().equals(People.Sex.MAN) && person.getAge() <= maleToAge)
-                        || (person.getSex().equals(People.Sex.WOMEN) && person.getAge() <= femaleToAge)))
+                .filter(per -> per.getAge() >= fromAge
+                        && ((per.getSex().equals(People.Sex.MAN) && per.getAge() <= maleToAge)
+                        || (per.getSex().equals(People.Sex.WOMEN) && per.getAge() <= femaleToAge)))
                 .collect(Collectors.toList());
     }
 
@@ -108,7 +107,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.WOMEN) && people.getAge() > femaleAge)
+                .filter(per -> per.getSex().equals(People.Sex.WOMEN) && per.getAge() > femaleAge)
                 .flatMap(cats -> cats.getCatList().stream())
                 .map(Cat::getName)
                 .collect(Collectors.toList());
