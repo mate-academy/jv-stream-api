@@ -13,7 +13,8 @@ public class JavaStreamApi {
      * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
      **/
     public Integer oddSum(List<Integer> numbers) {
-        return numbers.stream().mapToInt((n) -> n % 2 == 1 ? n : 0).sum();
+        return numbers.stream()
+                .mapToInt((n) -> n % 2 == 1 ? n : 0).sum();
     }
 
     /**
@@ -22,7 +23,9 @@ public class JavaStreamApi {
      * Вернуть количество вхождений объекта `element`</p>
      **/
     public Long elementCount(List<String> elements, String element) {
-        return elements.stream().filter(element::equals).count();
+        return elements.stream()
+                .filter(element::equals)
+                .count();
     }
 
     /**
@@ -31,7 +34,8 @@ public class JavaStreamApi {
      * Вернуть Optional первого элемента коллекции</p>
      **/
     public Optional<String> firstElement(List<String> elements) {
-        return elements.stream().findFirst();
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -88,9 +92,10 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(p -> p.getAge() >= fromAge)
-                .filter(p -> p.getSex() == People.Sex.MAN && p.getAge() <= maleToAge
-                        || p.getSex() == People.Sex.WOMEN && p.getAge() <= femaleToAge)
+                .filter(p -> p.getAge() >= fromAge
+                        && p.getSex() == People.Sex.MAN && p.getAge() <= maleToAge
+                        || p.getAge() >= fromAge
+                        && p.getSex() == People.Sex.WOMEN && p.getAge() <= femaleToAge)
                 .collect(Collectors.toList());
     }
 
