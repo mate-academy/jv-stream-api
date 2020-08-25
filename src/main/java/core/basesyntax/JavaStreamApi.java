@@ -58,7 +58,7 @@ public class JavaStreamApi {
 
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.WOMEN)
+                .filter(people -> people.getSex() == People.Sex.WOMEN
                         && people.getAge() >= femaleAge)
                 .flatMap(people -> people.getCatList().stream())
                 .map(Cat::getName)
