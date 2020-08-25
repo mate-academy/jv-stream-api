@@ -19,13 +19,13 @@
    for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN), new People(«Елена», 42, Sex.WOMEN))`,  
    select from the List only men whose age is from `fromAge` to `toAge` inclusively.  
    
-   _Example: select men of military age (from 18 to 27 years old inclusively)._
+   _Example: select men who can be recruited to army (from 18 to 27 years old inclusively)._
    
 7. Given a List of `People` instances (having `name`, `age` and `sex` fields),  
    for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN), new People(«Елена», 42, Sex.WOMEN))`,  
    select from the List only people whose age is from `fromAge` and to `maleToAge` (for men) or to `femaleToAge` (for women) inclusively.  
    
-   _Example: select potential working-age people (from 18 y.o. and to 55 y.o. for men and to 60 y.o. for women inclusively)._
+   _Example: select people of working age (from 18 y.o. and to 55 y.o. for men and to 60 y.o. for women inclusively)._
    
 7. Given a List of `People` instances (having `name`, `age`, `sex` and `List<Cat> cats` fields, 
    and each `Cat` having a `name` and `age`),  

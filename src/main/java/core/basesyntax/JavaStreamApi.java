@@ -52,7 +52,7 @@ public class JavaStreamApi {
      *                              new People(«Елена», 42, Sex.WOMEN))`,
      * select from the List only men whose age is from `fromAge` to `toAge` inclusively.
      *
-     * Example: select men of military age (from 18 to 27 years old inclusively).
+     * Example: select men who can be recruited to army (from 18 to 27 years old inclusively).
      */
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return Collections.emptyList();
@@ -65,7 +65,7 @@ public class JavaStreamApi {
      * select from the List only people whose age is from `fromAge` and to `maleToAge` (for men)
      * or to `femaleToAge` (for women) inclusively.
      *
-     * Example: select potential working-age people
+     * Example: select people of working age
      * (from 18 y.o. and to 55 y.o. for men and to 60 y.o. for women inclusively).
      */
     public List<People> workablePeople(int fromAge, int femaleToAge,
