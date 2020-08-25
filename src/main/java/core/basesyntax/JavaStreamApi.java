@@ -76,7 +76,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(potatoPeeler -> potatoPeeler.getAge() > fromAge
                         && potatoPeeler.getAge() < toAge
-                        && potatoPeeler.getSex().equals(People.Sex.MAN))
+                        && potatoPeeler.getSex() == People.Sex.MAN)
                 .collect(Collectors.toList());
     }
 
