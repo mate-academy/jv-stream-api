@@ -52,7 +52,7 @@ public class JavaStreamApi {
                 .stream()
                 .filter(elem -> elem.equals(element))
                 .findAny()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -67,7 +67,7 @@ public class JavaStreamApi {
                 .map(index -> index % 2 != 0 ? numbers.get(index) - 1 : numbers.get(index))
                 .filter(x -> x % 2 != 0)
                 .average()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow();
     }
 
     /**
@@ -83,7 +83,8 @@ public class JavaStreamApi {
                 .stream()
                 .filter(men -> men.getSex() == People.Sex.MAN
                         && men.getAge() >= fromAge
-                        && men.getAge() <= toAge).collect(Collectors.toList());
+                        && men.getAge() <= toAge)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -118,6 +119,7 @@ public class JavaStreamApi {
                 .filter(girl -> girl.getAge() >= femaleAge
                         && girl.getSex() == People.Sex.WOMEN)
                 .flatMap(girl -> girl.getCatList().stream())
-                .map(Cat::getName).collect(Collectors.toList());
+                .map(Cat::getName)
+                .collect(Collectors.toList());
     }
 }
