@@ -14,10 +14,9 @@ public class JavaStreamApi {
     }
 
     public Long elementCount(List<String> elements, String element) {
-        return (long) elements.stream()
+        return elements.stream()
                 .filter(item -> element.equals(item))
-                .collect(Collectors.toList())
-                .size();
+                .count();
     }
 
     public Optional<String> firstElement(List<String> elements) {
