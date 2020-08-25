@@ -48,7 +48,8 @@ public class JavaStreamApi {
         return elements.stream()
                 .filter(string -> string.equals(element))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("This 'element' don't exist!"));
+                .orElseThrow(() -> new NoSuchElementException("This 'element' = "
+                        + element + " doesn't exist!"));
     }
 
     /**
@@ -75,7 +76,7 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(people -> people.getSex().equals(People.Sex.MAN)
+                .filter(people -> people.getSex() == People.Sex.MAN
                         && (fromAge <= people.getAge())
                         && (people.getAge() <= toAge))
                 .collect(Collectors.toList());
