@@ -14,8 +14,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(number -> number % 2 != 0)
-                .reduce(Integer::sum)
-                .orElse(0);
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -75,7 +74,7 @@ public class JavaStreamApi {
      **/
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(person -> person.getSex().equals(People.Sex.MAN)
+                .filter(person -> person.getSex() == (People.Sex.MAN)
                         && person.getAge() >= fromAge
                         && person.getAge() <= toAge)
                 .collect(Collectors.toList());
@@ -94,12 +93,11 @@ public class JavaStreamApi {
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
-                .filter(person -> person.getSex().equals(People.Sex.MAN)
-                        && person.getAge() >= fromAge
+                .filter(person -> person.getAge() >= fromAge
+                        && (person.getSex().equals(People.Sex.MAN)
                         && person.getAge() <= maleToAge
                         || person.getSex().equals(People.Sex.WOMEN)
-                        && person.getAge() >= fromAge
-                        && person.getAge() <= femaleToAge)
+                        && person.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -111,8 +109,7 @@ public class JavaStreamApi {
      **/
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return peopleList.stream()
-                .filter(person -> !person.getCatList().isEmpty()
-                        && person.getSex().equals(People.Sex.WOMEN)
+                .filter(person -> person.getSex().equals(People.Sex.WOMEN)
                         && person.getAge() >= femaleAge)
                 .flatMap(person -> person.getCatList().stream())
                 .map(Cat::getName)
