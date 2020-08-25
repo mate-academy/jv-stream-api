@@ -50,9 +50,9 @@ public class JavaStreamApi {
      * Given a List of `People` instances (having `name`, `age` and `sex` fields),
      * for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN),
      *                              new People(«Елена», 42, Sex.WOMEN))`,
-     * select from the List only men whose age is from `fromAge` to `toAge`.
+     * select from the List only men whose age is from `fromAge` to `toAge` inclusively.
      *
-     * Example: select men of military age (from 18 to 27 years old).
+     * Example: select men of military age (from 18 to 27 years old inclusively).
      */
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return Collections.emptyList();
@@ -63,10 +63,10 @@ public class JavaStreamApi {
      * for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN),
      *                              new People(«Елена», 42, Sex.WOMEN))`,
      * select from the List only people whose age is from `fromAge` and to `maleToAge` (for men)
-     * or to `femaleToAge` (for women).
+     * or to `femaleToAge` (for women) inclusively.
      *
      * Example: select potential working-age people
-     * (from 18 y.o. and to 55 y.o. for men and to 60 y.o. for women).
+     * (from 18 y.o. and to 55 y.o. for men and to 60 y.o. for women inclusively).
      */
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
@@ -76,7 +76,7 @@ public class JavaStreamApi {
     /**
      * Given a List of `People` instances (having `name`, `age`, `sex` and `List<Cat> cats` fields,
      * and each `Cat` having a `name` and `age`),
-     * return the names of all cats whose owners are women from 18 years old.
+     * return the names of all cats whose owners are women from `femaleAge` years old inclusively.
      */
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return Collections.emptyList();
