@@ -10,7 +10,7 @@ public class JavaStreamApi {
     public Integer oddSum(List<Integer> numbers) {
         return numbers.stream()
                 .filter(x -> x % 2 != 0)
-                .reduce(0, Integer::sum);
+                .reduce(0,Integer::sum);
     }
 
     public Long elementCount(List<String> elements, String element) {
@@ -41,7 +41,7 @@ public class JavaStreamApi {
 
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return peopleList.stream()
-                .filter(x -> x.getSex() == People.Sex.MAN
+                .filter(x -> x.getSex() == x.getSex().MAN
                         && x.getAge() > fromAge && x.getAge() < toAge)
                 .collect(Collectors.toList());
     }
@@ -50,9 +50,9 @@ public class JavaStreamApi {
                                        int maleToAge, List<People> peopleList) {
         return peopleList.stream()
                 .filter(x -> x.getAge() >= fromAge
-                        && (x.getSex() == People.Sex.MAN
+                        && (x.getSex() == x.getSex().MAN
                         && x.getAge() <= maleToAge
-                        || x.getSex() == People.Sex.WOMEN && x.getAge() <= femaleToAge))
+                        || x.getSex() == x.getSex().WOMEN && x.getAge() <= femaleToAge))
                 .collect(Collectors.toList());
     }
 
@@ -60,7 +60,7 @@ public class JavaStreamApi {
         return peopleList.stream()
                 .filter(x -> x.getSex() == People.Sex.WOMEN && x.getAge() > femaleAge)
                 .flatMap(x -> x.getCatList().stream())
-                .map(Cat::getName)
+                .map(x -> x.getName())
                 .collect(Collectors.toList());
     }
 }
