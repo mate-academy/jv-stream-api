@@ -40,6 +40,7 @@ public class JavaStreamApiTest {
         peopleList.get(7).getCatList().add(new Cat("Jackie", 2));
         peopleList.add(new People("Roman", 25, People.Sex.MAN));
         peopleList.add(new People("Carlos", 60, People.Sex.MAN));
+        peopleList.add(new People("Kate", 10, People.Sex.WOMEN));
 
         peopleListWithoutCat = new ArrayList<>();
         peopleListWithoutCat.add(new People("Helen", 16, People.Sex.WOMEN));
