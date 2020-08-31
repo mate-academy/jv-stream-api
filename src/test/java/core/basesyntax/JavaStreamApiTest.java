@@ -213,9 +213,9 @@ public class JavaStreamApiTest {
 
     @Test
     public void getThreeSmallestNumbers() {
-        int[] input = {5, 135, 3, 3, 0, 7, 23, 7, 15, -2, 44, 9};
+        int[] basicArr = {5, 135, 3, 3, 0, 7, 23, 7, 15, -2, 44, 9};
         List<Integer> expected = List.of(-2, 0, 3);
-        Assert.assertEquals(expected, javaStreamApi.getThreeSmallestNumbers(input));
+        Assert.assertEquals(expected, javaStreamApi.getThreeSmallestNumbers(basicArr));
     }
     @Test
     public void getThreeSmallestNumbersEmpty() {
@@ -224,8 +224,8 @@ public class JavaStreamApiTest {
     }
     @Test
     public void getThreeSmallestNumbersSingleElement() {
-        int[] input ={14};
+        int[] singleElementArr = {14};
         List<Integer> expected = List.of(14);
-        Assert.assertEquals(expected, javaStreamApi.getThreeSmallestNumbers(input));
+        Assert.assertEquals(expected, javaStreamApi.getThreeSmallestNumbers(singleElementArr));
     }
 }
