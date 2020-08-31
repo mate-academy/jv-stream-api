@@ -33,6 +33,7 @@ public class JavaStreamApiTest {
         peopleList.add(new People("Мария", 25, People.Sex.WOMEN, new ArrayList<>()));
         peopleList.get(5).getCatList().add(new Cat("Моня", 1));
         peopleList.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.add(new People("Оксана Ивановна", 57, People.Sex.WOMEN, new ArrayList<>()));
         peopleList.get(6).getCatList().add(new Cat("Киса", 3));
         peopleList.get(6).getCatList().add(new Cat("КотЭ", 4));
         peopleList.add(new People("Роман", 25, People.Sex.MAN));
