@@ -1,8 +1,10 @@
 package core.basesyntax;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class JavaStreamApi {
 
@@ -27,6 +29,18 @@ public class JavaStreamApi {
      */
     public Optional<String> getFirstElement(List<String> elements) {
         return null;
+    }
+
+    /**
+     * Given a arrays of ints, return three smallest numbers as list in sorted manner.
+     * For example for input {4, 1, 10, 20, 11, 3} output will be {1, 3, 4};
+     */
+    public List<Integer> getThreeSmallestNumbers(int[] numbers) {
+        return Arrays.stream(numbers)
+            .boxed()
+            .sorted()
+            .limit(3)
+            .collect(Collectors.toList());
     }
 
     /**
