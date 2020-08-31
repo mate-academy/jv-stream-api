@@ -210,4 +210,22 @@ public class JavaStreamApiTest {
         List<String> result = javaStreamApi.getCatsNames(peopleList, 60);
         Assert.assertEquals(expected, result);
     }
+
+    @Test
+    public void getThreeSmallestNumbers() {
+        int[] basicArr = {5, 135, 3, 3, 0, 7, 23, 7, 15, -2, 44, 9};
+        List<Integer> expected = List.of(-2, 0, 3);
+        Assert.assertEquals(expected, javaStreamApi.getThreeSmallestNumbers(basicArr));
+    }
+    @Test
+    public void getThreeSmallestNumbersEmpty() {
+        int[] emptyArr = new int[0];
+        Assert.assertEquals(Collections.emptyList(), javaStreamApi.getThreeSmallestNumbers(emptyArr));
+    }
+    @Test
+    public void getThreeSmallestNumbersSingleElement() {
+        int[] singleElementArr = {14};
+        List<Integer> expected = List.of(14);
+        Assert.assertEquals(expected, javaStreamApi.getThreeSmallestNumbers(singleElementArr));
+    }
 }

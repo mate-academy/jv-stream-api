@@ -30,6 +30,14 @@ public class JavaStreamApi {
     }
 
     /**
+     * Given a arrays of ints, return three smallest numbers as list in sorted manner.
+     * For example for input {4, 1, 10, 20, 11, 3} output will be {1, 3, 4};
+     */
+    public List<Integer> getThreeSmallestNumbers(int[] numbers) {
+        return Collections.emptyList();
+    }
+
+    /**
      * Given a List of Strings,
      * find the String equal to the passed `element` or throw NoSuchElementException.
      */
