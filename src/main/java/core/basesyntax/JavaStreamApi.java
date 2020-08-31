@@ -7,83 +7,77 @@ import java.util.Optional;
 public class JavaStreamApi {
 
     /**
-     * <p>1. Дано: List of Integer numbers.
-     * Вернуть сумму нечетных числел или 0, если таких несуществует</p>
-     **/
+     * Given a List of Integer numbers,
+     * return a sum of odd numbers or 0, if there are no odd numbers in the List.
+     */
     public Integer oddSum(List<Integer> numbers) {
         return null;
     }
 
     /**
-     * <p>2. Дана коллекция строк List of String elements
-     * (пример: Arrays.asList(«a1», «a2», «a3», «a1»)).
-     * Вернуть количество вхождений объекта `element`</p>
-     **/
+     * Given a List of Strings,
+     * return a number of times the `element` String occurs in the List.
+     */
     public Long elementCount(List<String> elements, String element) {
         return null;
     }
 
     /**
-     * <p>3. Дана коллекция строк List of String elements
-     * (пример: Arrays.asList(«a1», «a2», «a3», «a1»)).
-     * Вернуть Optional первого элемента коллекции</p>
-     **/
+     * Given a List of Strings, return the Optional of its first element.
+     */
     public Optional<String> firstElement(List<String> elements) {
         return null;
     }
 
     /**
-     * <p>4. Дана коллекция строк List of String elements
-     * (приметр: Arrays.asList(«a1», «a2», «a3», «a1»)).
-     * Найти элемент в коллекции равный `element` или кинуть ошибку NoSuchElementException</p>
-     **/
+     * Given a List of Strings,
+     * find the String equal to the passed `element` or throw NoSuchElementException.
+     */
     public String findElement(List<String> elements, String element) {
         return null;
     }
 
     /**
-     * <p>5. Дана коллекция чисел List of Integer numbers (пример: Arrays.asList(6, 2, 3, 7, 2, 5))
-     * Отнимите от каждого элемента, который стоит на непарной позиции (имеет не парный индекс) 1
-     * и верните среднее арифметическое всех нечетных чисел или киньте ошибку
-     * NoSuchElementException</p>
-     **/
+     * Given a List of Integer numbers,
+     * subtract 1 from each element on an odd position (having the odd index).
+     * Then return the average of all odd numbers or throw NoSuchElementException.
+     */
     public Double averageSumOdd(List<Integer> numbers) {
         return null;
     }
 
     /**
-     * <p>6. Дана коллекция класс People (с полями name — имя, age — возраст, sex — пол),
-     * вида Arrays.asList( new People(«Вася», 16, Sex.MAN),
-     * new People(«Петя», 23, Sex.MAN),
-     * new People(«Елена», 42, Sex.WOMEN),
-     * new People(«Иван Иванович», 69, Sex.MAN)).
-     * Задача: Выбрать мужчин-военнообязанных (от `fromAge` до `toAge` лет)</p>
-     **/
+     * Given a List of `People` instances (having `name`, `age` and `sex` fields),
+     * for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN),
+     *                              new People(«Елена», 42, Sex.WOMEN))`,
+     * select from the List only men whose age is from `fromAge` to `toAge` inclusively.
+     *
+     * Example: select men who can be recruited to army (from 18 to 27 years old inclusively).
+     */
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
         return Collections.emptyList();
     }
 
     /**
-     * <p>6. Дана коллекция класс People (с полями name — имя, age — возраст, sex — пол),
-     * вида Arrays.asList( new People(«Вася», 16, Sex.MAN),
-     * new People(«Петя», 23, Sex.MAN),
-     * new People(«Елена», 42, Sex.WOMEN),
-     * new People(«Иван Иванович», 69, Sex.MAN)).
-     * Задача: Найти всех потенциально работоспособных людей в выборке от fromAge до
-     * femaleToAge для женщин, и от fromAge до maleToAge для мужчин
-     * Пример: от 18 лет и учитывая что женщины выходят в 55 лет, а мужчина в 60</p>
-     **/
+     * Given a List of `People` instances (having `name`, `age` and `sex` fields),
+     * for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN),
+     *                              new People(«Елена», 42, Sex.WOMEN))`,
+     * select from the List only people whose age is from `fromAge` and to `maleToAge` (for men)
+     * or to `femaleToAge` (for women) inclusively.
+     *
+     * Example: select people of working age
+     * (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively).
+     */
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
         return Collections.emptyList();
     }
 
     /**
-     * <p>7. Дано коллекцию List of peoples. Класс People (с полями name — имя, age — возраст,
-     * sex — пол, List of Cats -  кошки этого человека).
-     * Дано класс Cat (name - имя кошки, age - возраст кошки).
-     * Задача: вивести все имена кошек в которых хозяева это девушки старше 18 лет</p>
-     **/
+     * Given a List of `People` instances (having `name`, `age`, `sex` and `List<Cat> cats` fields,
+     * and each `Cat` having a `name` and `age`),
+     * return the names of all cats whose owners are women from `femaleAge` years old inclusively.
+     */
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
         return Collections.emptyList();
     }
