@@ -151,7 +151,6 @@ public class JavaStreamApiTest {
         expected.add(new People("Rick", 37, People.Sex.MAN));
         expected.get(1).getCatList().add(new Cat("Chloe", 1));
         expected.add(new People("Roman", 25, People.Sex.MAN));
-        expected.add(new People("Roman", 37, People.Sex.MAN));
         List<People> result = javaStreamApi.selectMenByAge(peopleList, 18, 37);
         Assert.assertEquals(expected, result);
     }
