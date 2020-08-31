@@ -206,7 +206,7 @@ public class JavaStreamApiTest {
 
     @Test
     public void getCatsNamesAbsent() {
-        List<String> expected = List.of();
+        List<String> expected = new ArrayList<>();
         List<String> result = javaStreamApi.getCatsNames(peopleList, 60);
         Assert.assertEquals(expected, result);
     }
