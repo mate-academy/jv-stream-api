@@ -16,13 +16,13 @@
    Then return the average of all odd numbers or throw NoSuchElementException. 
     
 6. Given a List of `People` instances (having `name`, `age` and `sex` fields),  
-   for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN), new People(«Елена», 42, Sex.WOMEN))`,  
+   for example, `Arrays.asList( new People(«Victor», 16, Sex.MAN), new People(«Helen», 42, Sex.WOMEN))`,  
    select from the List only men whose age is from `fromAge` to `toAge` inclusively.  
    
    _Example: select men who can be recruited to army (from 18 to 27 years old inclusively)._
    
 7. Given a List of `People` instances (having `name`, `age` and `sex` fields),  
-   for example, `Arrays.asList( new People(«Вася», 16, Sex.MAN), new People(«Елена», 42, Sex.WOMEN))`,  
+   for example, `Arrays.asList( new People(«Victor», 16, Sex.MAN), new People(«Helen», 42, Sex.WOMEN))`,  
    select from the List only people whose age is from `fromAge` and to `maleToAge` (for men) or to `femaleToAge` (for women) inclusively.  
    
    _Example: select people of working age (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively)._
