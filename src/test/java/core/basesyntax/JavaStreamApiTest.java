@@ -49,49 +49,49 @@ public class JavaStreamApiTest {
     public void oddSum() {
         Integer expected = 9;
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-        Integer result = javaStreamApi.oddSum(numbers);
+        Integer result = javaStreamApi.getOddNumsSum(numbers);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void oddSumOneNumber() {
         Integer expected = 9;
-        Integer result = javaStreamApi.oddSum(Arrays.asList(9));
+        Integer result = javaStreamApi.getOddNumsSum(Arrays.asList(9));
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void oddSumOddAbsent() {
         Integer expected = 0;
-        Integer result = javaStreamApi.oddSum(Arrays.asList(6, 2, 8, 4, 12));
+        Integer result = javaStreamApi.getOddNumsSum(Arrays.asList(6, 2, 8, 4, 12));
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void elementCount() {
         Long expected = 2L;
-        Long result = javaStreamApi.elementCount(elements, "a1");
+        Long result = javaStreamApi.calculateOccurrences(elements, "a1");
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void elementCountAbsent() {
         Long expected = 0L;
-        Long result = javaStreamApi.elementCount(elements, "a4");
+        Long result = javaStreamApi.calculateOccurrences(elements, "a4");
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void firstElement() {
         Optional<String> expected = Optional.of("a1");
-        Optional<String> result = javaStreamApi.firstElement(elements);
+        Optional<String> result = javaStreamApi.getFirstElement(elements);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void firstElementEmptyList() {
         Optional<String> expected = Optional.empty();
-        Optional<String> result = javaStreamApi.firstElement(Collections.emptyList());
+        Optional<String> result = javaStreamApi.getFirstElement(Collections.emptyList());
         Assert.assertEquals(expected, result);
     }
 
@@ -113,7 +113,7 @@ public class JavaStreamApiTest {
     public void averageSumOddPartOdd() {
         Double expected = 2.0;
         List<Integer> digits = Arrays.asList(6, 2, 3, 7, 2, 5);
-        Double result = javaStreamApi.averageSumOdd(digits);
+        Double result = javaStreamApi.getOddNumsAverage(digits);
         Assert.assertEquals(expected, result);
     }
 
@@ -121,7 +121,7 @@ public class JavaStreamApiTest {
     public void averageSumOddAllOdd() {
         Double expected = 4.0;
         List<Integer> digits = Arrays.asList(7, 2, 3, 4, 5, 6);
-        Double result = javaStreamApi.averageSumOdd(digits);
+        Double result = javaStreamApi.getOddNumsAverage(digits);
         Assert.assertEquals(expected, result);
     }
 
@@ -129,7 +129,7 @@ public class JavaStreamApiTest {
     public void averageSumOddOneOdd() {
         Double expected = 3.0;
         List<Integer> digits = Arrays.asList(6, 4, 8, 7, 2, 5);
-        Double result = javaStreamApi.averageSumOdd(digits);
+        Double result = javaStreamApi.getOddNumsAverage(digits);
         Assert.assertEquals(expected, result);
     }
 
@@ -137,7 +137,7 @@ public class JavaStreamApiTest {
     public void averageSumOddOptionalEmpty() {
         Double expected = 2.0;
         List<Integer> digits = Arrays.asList(6, 1, 2, 7, 2, 5);
-        Double result = javaStreamApi.averageSumOdd(digits);
+        Double result = javaStreamApi.getOddNumsAverage(digits);
         Assert.assertEquals(expected, result);
     }
 
@@ -146,14 +146,14 @@ public class JavaStreamApiTest {
         List<People> expected = new ArrayList<>();
         expected.add(new People("Петя", 23, People.Sex.MAN));
         expected.add(new People("Роман", 25, People.Sex.MAN));
-        List<People> result = javaStreamApi.manSelectByAge(peopleList, 18, 27);
+        List<People> result = javaStreamApi.selectMenByAge(peopleList, 18, 27);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void manSelectByAgeAbsent() {
         List<People> expected = new ArrayList<>();
-        List<People> result = javaStreamApi.manSelectByAge(peopleList, 14, 15);
+        List<People> result = javaStreamApi.selectMenByAge(peopleList, 14, 15);
         Assert.assertEquals(expected, result);
     }
 
@@ -172,14 +172,14 @@ public class JavaStreamApiTest {
         expected.get(4).getCatList().add(new Cat("Киса", 3));
         expected.get(4).getCatList().add(new Cat("КотЭ", 4));
         expected.add(new People("Роман", 25, People.Sex.MAN));
-        List<People> result = javaStreamApi.workablePeople(18, 55, 60, peopleList);
+        List<People> result = javaStreamApi.getWorkablePeople(18, 55, 60, peopleList);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void workablePeopleAbsent() {
         List<People> expected = new ArrayList<>();
-        List<People> result = javaStreamApi.workablePeople(12, 14, 15, peopleList);
+        List<People> result = javaStreamApi.getWorkablePeople(12, 14, 15, peopleList);
         Assert.assertEquals(expected, result);
     }
 

@@ -10,7 +10,7 @@ public class JavaStreamApi {
      * Given a List of Integer numbers,
      * return a sum of odd numbers or 0, if there are no odd numbers in the List.
      */
-    public Integer oddSum(List<Integer> numbers) {
+    public Integer getOddNumsSum(List<Integer> numbers) {
         return null;
     }
 
@@ -18,14 +18,14 @@ public class JavaStreamApi {
      * Given a List of Strings,
      * return a number of times the `element` String occurs in the List.
      */
-    public Long elementCount(List<String> elements, String element) {
+    public Long calculateOccurrences(List<String> elements, String element) {
         return null;
     }
 
     /**
      * Given a List of Strings, return the Optional of its first element.
      */
-    public Optional<String> firstElement(List<String> elements) {
+    public Optional<String> getFirstElement(List<String> elements) {
         return null;
     }
 
@@ -42,7 +42,7 @@ public class JavaStreamApi {
      * subtract 1 from each element on an odd position (having the odd index).
      * Then return the average of all odd numbers or throw NoSuchElementException.
      */
-    public Double averageSumOdd(List<Integer> numbers) {
+    public Double getOddNumsAverage(List<Integer> numbers) {
         return null;
     }
 
@@ -54,7 +54,7 @@ public class JavaStreamApi {
      *
      * Example: select men who can be recruited to army (from 18 to 27 years old inclusively).
      */
-    public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
+    public List<People> selectMenByAge(List<People> peopleList, int fromAge, int toAge) {
         return Collections.emptyList();
     }
 
@@ -68,8 +68,8 @@ public class JavaStreamApi {
      * Example: select people of working age
      * (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively).
      */
-    public List<People> workablePeople(int fromAge, int femaleToAge,
-                                       int maleToAge, List<People> peopleList) {
+    public List<People> getWorkablePeople(int fromAge, int femaleToAge,
+                                          int maleToAge, List<People> peopleList) {
         return Collections.emptyList();
     }
 
