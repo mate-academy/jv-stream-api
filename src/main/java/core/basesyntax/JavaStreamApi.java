@@ -36,11 +36,7 @@ public class JavaStreamApi {
      * For example for input {4, 1, 10, 20, 11, 3} output will be {1, 3, 4};
      */
     public List<Integer> getThreeSmallestNumbers(int[] numbers) {
-        return Arrays.stream(numbers)
-            .boxed()
-            .sorted()
-            .limit(3)
-            .collect(Collectors.toList());
+        return Collections.emptyList();
     }
 
     /**
