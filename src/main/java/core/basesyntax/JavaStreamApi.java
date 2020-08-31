@@ -1,8 +1,9 @@
 package core.basesyntax;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class JavaStreamApi {
 
@@ -11,7 +12,9 @@ public class JavaStreamApi {
      * return a sum of odd numbers or 0, if there are no odd numbers in the List.
      */
     public Integer oddSum(List<Integer> numbers) {
-        return null;
+        return numbers.stream()
+                .filter((n) -> n % 2 == 1)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -19,14 +22,17 @@ public class JavaStreamApi {
      * return a number of times the `element` String occurs in the List.
      */
     public Long elementCount(List<String> elements, String element) {
-        return null;
+        return elements.stream()
+                .filter(element::equals)
+                .count();
     }
 
     /**
      * Given a List of Strings, return the Optional of its first element.
      */
     public Optional<String> firstElement(List<String> elements) {
-        return null;
+        return elements.stream()
+                .findFirst();
     }
 
     /**
@@ -34,7 +40,10 @@ public class JavaStreamApi {
      * find the String equal to the passed `element` or throw NoSuchElementException.
      */
     public String findElement(List<String> elements, String element) {
-        return null;
+        return elements.stream()
+                .filter(element::equals)
+                .findFirst()
+                .orElseThrow();
     }
 
     /**
@@ -43,7 +52,11 @@ public class JavaStreamApi {
      * Then return the average of all odd numbers or throw NoSuchElementException.
      */
     public Double averageSumOdd(List<Integer> numbers) {
-        return null;
+        return IntStream.range(0, numbers.size())
+                .map(i -> i % 2 == 1 ? numbers.get(i) - 1 : numbers.get(i))
+                .filter(n -> n % 2 == 1)
+                .average()
+                .orElseThrow();
     }
 
     /**
@@ -55,7 +68,10 @@ public class JavaStreamApi {
      * Example: select men who can be recruited to army (from 18 to 27 years old inclusively).
      */
     public List<People> manSelectByAge(List<People> peopleList, int fromAge, int toAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(p -> p.getAge() >= fromAge
+                        && p.getAge() <= toAge && p.getSex() == People.Sex.MAN)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -70,7 +86,11 @@ public class JavaStreamApi {
      */
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(p -> p.getAge() >= fromAge
+                        && (p.getSex() == People.Sex.MAN && p.getAge() <= maleToAge
+                        || p.getSex() == People.Sex.WOMEN && p.getAge() <= femaleToAge))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -79,6 +99,10 @@ public class JavaStreamApi {
      * return the names of all cats whose owners are women from `femaleAge` years old inclusively.
      */
     public List<String> getCatsNames(List<People> peopleList, int femaleAge) {
-        return Collections.emptyList();
+        return peopleList.stream()
+                .filter(p -> p.getSex() == People.Sex.WOMEN && p.getAge() > femaleAge)
+                .flatMap(p -> p.getCatList().stream())
+                .map(Cat::getName)
+                .collect(Collectors.toList());
     }
 }
