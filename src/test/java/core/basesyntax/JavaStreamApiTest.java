@@ -22,27 +22,27 @@ public class JavaStreamApiTest {
         javaStreamApi = new JavaStreamApi();
         elements = Arrays.asList("a1", "a2", "a3", "a1");
         peopleList = new ArrayList<>();
-        peopleList.add(new People("Вася", 16, People.Sex.MAN));
-        peopleList.add(new People("Петя", 23, People.Sex.MAN));
-        peopleList.add(new People("Елена", 42, People.Sex.WOMEN, new ArrayList<>()));
-        peopleList.get(2).getCatList().add(new Cat("Матроскин", 2));
-        peopleList.get(2).getCatList().add(new Cat("Барсик", 3));
-        peopleList.add(new People("Иван Иванович", 69, People.Sex.MAN));
-        peopleList.add(new People("Коля", 37, People.Sex.MAN, new ArrayList<>()));
-        peopleList.get(4).getCatList().add(new Cat("Лия", 1));
-        peopleList.add(new People("Мария", 25, People.Sex.WOMEN, new ArrayList<>()));
-        peopleList.get(5).getCatList().add(new Cat("Моня", 1));
-        peopleList.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
-        peopleList.add(new People("Оксана Ивановна", 57, People.Sex.WOMEN, new ArrayList<>()));
-        peopleList.get(6).getCatList().add(new Cat("Киса", 3));
-        peopleList.get(6).getCatList().add(new Cat("КотЭ", 4));
-        peopleList.add(new People("Роман", 25, People.Sex.MAN));
+        peopleList.add(new People("Victor", 16, People.Sex.MAN));
+        peopleList.add(new People("Peter", 23, People.Sex.MAN));
+        peopleList.add(new People("Helen", 42, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.get(2).getCatList().add(new Cat("Tom", 2));
+        peopleList.get(2).getCatList().add(new Cat("Leo", 3));
+        peopleList.add(new People("Jack Johnson", 69, People.Sex.MAN));
+        peopleList.add(new People("Rick", 37, People.Sex.MAN, new ArrayList<>()));
+        peopleList.get(4).getCatList().add(new Cat("Chloe", 1));
+        peopleList.add(new People("Mary", 25, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.get(5).getCatList().add(new Cat("Sunny", 1));
+        peopleList.add(new People("Emma Stuart", 55, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.add(new People("Alice Stone", 57, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.get(6).getCatList().add(new Cat("Kitty", 3));
+        peopleList.get(6).getCatList().add(new Cat("Fluffy", 4));
+        peopleList.add(new People("Roman", 25, People.Sex.MAN));
 
         peopleListWithoutCat = new ArrayList<>();
-        peopleListWithoutCat.add(new People("Елена", 16, People.Sex.WOMEN));
-        peopleListWithoutCat.add(new People("Мария", 25, People.Sex.WOMEN));
-        peopleListWithoutCat.add(new People("Ирина Алескандровна", 20, People.Sex.WOMEN));
-        peopleListWithoutCat.add(new People("Вася", 23, People.Sex.MAN));
+        peopleListWithoutCat.add(new People("Helen", 16, People.Sex.WOMEN));
+        peopleListWithoutCat.add(new People("Mary", 25, People.Sex.WOMEN));
+        peopleListWithoutCat.add(new People("Emma Stuart", 20, People.Sex.WOMEN));
+        peopleListWithoutCat.add(new People("Victor", 23, People.Sex.MAN));
     }
 
     @Test
@@ -144,8 +144,8 @@ public class JavaStreamApiTest {
     @Test
     public void manSelectByAge() {
         List<People> expected = new ArrayList<>();
-        expected.add(new People("Петя", 23, People.Sex.MAN));
-        expected.add(new People("Роман", 25, People.Sex.MAN));
+        expected.add(new People("Peter", 23, People.Sex.MAN));
+        expected.add(new People("Roman", 25, People.Sex.MAN));
         List<People> result = javaStreamApi.selectMenByAge(peopleList, 18, 27);
         Assert.assertEquals(expected, result);
     }
@@ -160,18 +160,18 @@ public class JavaStreamApiTest {
     @Test
     public void workablePeople() {
         List<People> expected = new ArrayList<>();
-        expected.add(new People("Петя", 23, People.Sex.MAN));
-        expected.add(new People("Елена", 42, People.Sex.WOMEN, new ArrayList<>()));
-        expected.get(1).getCatList().add(new Cat("Матроскин", 2));
-        expected.get(1).getCatList().add(new Cat("Барсик", 3));
-        expected.add(new People("Коля", 37, People.Sex.MAN, new ArrayList<>()));
-        expected.get(2).getCatList().add(new Cat("Лия", 1));
-        expected.add(new People("Мария", 25, People.Sex.WOMEN, new ArrayList<>()));
-        expected.get(3).getCatList().add(new Cat("Моня", 1));
-        expected.add(new People("Ирина Алескандровна", 55, People.Sex.WOMEN, new ArrayList<>()));
-        expected.get(4).getCatList().add(new Cat("Киса", 3));
-        expected.get(4).getCatList().add(new Cat("КотЭ", 4));
-        expected.add(new People("Роман", 25, People.Sex.MAN));
+        expected.add(new People("Peter", 23, People.Sex.MAN));
+        expected.add(new People("Helen", 42, People.Sex.WOMEN, new ArrayList<>()));
+        expected.get(1).getCatList().add(new Cat("Tom", 2));
+        expected.get(1).getCatList().add(new Cat("Leo", 3));
+        expected.add(new People("Rick", 37, People.Sex.MAN, new ArrayList<>()));
+        expected.get(2).getCatList().add(new Cat("Chloe", 1));
+        expected.add(new People("Mary", 25, People.Sex.WOMEN, new ArrayList<>()));
+        expected.get(3).getCatList().add(new Cat("Sunny", 1));
+        expected.add(new People("Emma Stuart", 55, People.Sex.WOMEN, new ArrayList<>()));
+        expected.get(4).getCatList().add(new Cat("Kitty", 3));
+        expected.get(4).getCatList().add(new Cat("Fluffy", 4));
+        expected.add(new People("Roman", 25, People.Sex.MAN));
         List<People> result = javaStreamApi.getWorkablePeople(18, 55, 60, peopleList);
         Assert.assertEquals(expected, result);
     }
@@ -185,7 +185,7 @@ public class JavaStreamApiTest {
 
     @Test
     public void getCatsNames() {
-        List<String> expected = Arrays.asList("Матроскин", "Барсик", "Моня", "Киса", "КотЭ");
+        List<String> expected = Arrays.asList("Tom", "Leo", "Sunny", "Kitty", "Fluffy");
         List<String> result = javaStreamApi.getCatsNames(peopleList, 18);
         Assert.assertEquals(expected, result);
     }
