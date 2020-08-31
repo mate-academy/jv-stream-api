@@ -148,6 +148,8 @@ public class JavaStreamApiTest {
     public void manSelectByAge() {
         List<People> expected = new ArrayList<>();
         expected.add(new People("Peter", 23, People.Sex.MAN));
+        expected.add(new People("Rick", 37, People.Sex.MAN));
+        expected.get(1).getCatList().add(new Cat("Chloe", 1));
         expected.add(new People("Roman", 25, People.Sex.MAN));
         expected.add(new People("Roman", 37, People.Sex.MAN));
         List<People> result = javaStreamApi.selectMenByAge(peopleList, 18, 37);
@@ -175,6 +177,7 @@ public class JavaStreamApiTest {
         expected.add(new People("Emma Stuart", 55, People.Sex.WOMEN, new ArrayList<>()));
         expected.get(4).getCatList().add(new Cat("Kitty", 3));
         expected.get(4).getCatList().add(new Cat("Fluffy", 4));
+        expected.add(new People("Janice Dean", 18, People.Sex.WOMEN, new ArrayList<>()));
         expected.add(new People("Roman", 25, People.Sex.MAN));
         expected.add(new People("Carlos", 60, People.Sex.MAN));
         List<People> result = javaStreamApi.getWorkablePeople(18, 55, 60, peopleList);
