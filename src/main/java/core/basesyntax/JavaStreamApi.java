@@ -66,7 +66,7 @@ public class JavaStreamApi {
      * or to `femaleToAge` (for women) inclusively.
      *
      * Example: select people of working age
-     * (from 18 y.o. and to 55 y.o. for men and to 60 y.o. for women inclusively).
+     * (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively).
      */
     public List<People> workablePeople(int fromAge, int femaleToAge,
                                        int maleToAge, List<People> peopleList) {
