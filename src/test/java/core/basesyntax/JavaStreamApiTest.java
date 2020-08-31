@@ -36,7 +36,10 @@ public class JavaStreamApiTest {
         peopleList.add(new People("Alice Stone", 57, People.Sex.WOMEN, new ArrayList<>()));
         peopleList.get(6).getCatList().add(new Cat("Kitty", 3));
         peopleList.get(6).getCatList().add(new Cat("Fluffy", 4));
+        peopleList.add(new People("Janice Dean", 18, People.Sex.WOMEN, new ArrayList<>()));
+        peopleList.get(7).getCatList().add(new Cat("Jackie", 2));
         peopleList.add(new People("Roman", 25, People.Sex.MAN));
+        peopleList.add(new People("Carlos", 60, People.Sex.MAN));
 
         peopleListWithoutCat = new ArrayList<>();
         peopleListWithoutCat.add(new People("Helen", 16, People.Sex.WOMEN));
@@ -146,7 +149,8 @@ public class JavaStreamApiTest {
         List<People> expected = new ArrayList<>();
         expected.add(new People("Peter", 23, People.Sex.MAN));
         expected.add(new People("Roman", 25, People.Sex.MAN));
-        List<People> result = javaStreamApi.selectMenByAge(peopleList, 18, 27);
+        expected.add(new People("Roman", 37, People.Sex.MAN));
+        List<People> result = javaStreamApi.selectMenByAge(peopleList, 18, 37);
         Assert.assertEquals(expected, result);
     }
 
@@ -172,6 +176,7 @@ public class JavaStreamApiTest {
         expected.get(4).getCatList().add(new Cat("Kitty", 3));
         expected.get(4).getCatList().add(new Cat("Fluffy", 4));
         expected.add(new People("Roman", 25, People.Sex.MAN));
+        expected.add(new People("Carlos", 60, People.Sex.MAN));
         List<People> result = javaStreamApi.getWorkablePeople(18, 55, 60, peopleList);
         Assert.assertEquals(expected, result);
     }
@@ -185,7 +190,7 @@ public class JavaStreamApiTest {
 
     @Test
     public void getCatsNames() {
-        List<String> expected = Arrays.asList("Tom", "Leo", "Sunny", "Kitty", "Fluffy");
+        List<String> expected = Arrays.asList("Tom", "Leo", "Sunny", "Kitty", "Fluffy", "Jackie");
         List<String> result = javaStreamApi.getCatsNames(peopleList, 18);
         Assert.assertEquals(expected, result);
     }
