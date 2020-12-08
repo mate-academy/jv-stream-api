@@ -160,7 +160,7 @@ public class JavaStreamApi {
     /**
      * Given a List of `People` instances (having `name`, `age` and `sex` fields),
      * for example, `Arrays.asList( new People(«Victor», 16, Sex.MAN),
-     * new People(«Helen», 42, Sex.WOMEN))`,
+     *                              new People(«Helen», 42, Sex.WOMEN))`,
      * select from the List only men whose age is from `fromAge` to `toAge` inclusively.
      *
      * Example: select men who can be recruited to army (from 18 to 27 years old inclusively).
@@ -175,7 +175,7 @@ public class JavaStreamApi {
     /**
      * Given a List of `People` instances (having `name`, `age` and `sex` fields),
      * for example, `Arrays.asList( new People(«Victor», 16, Sex.MAN),
-     * new People(«Helen», 42, Sex.WOMEN))`,
+     *                              new People(«Helen», 42, Sex.WOMEN))`,
      * select from the List only people whose age is from `fromAge` and to `maleToAge` (for men)
      * or to `femaleToAge` (for women) inclusively.
      *
