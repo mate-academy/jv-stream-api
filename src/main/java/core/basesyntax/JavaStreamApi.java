@@ -104,7 +104,6 @@ public class JavaStreamApi {
             .collect(Collectors.joining("]\n[", "[", "]"));
     }
 
-
     /**
      * Given list strings representing records of patients' visits to a Hospital
      * {"John Stevenson - 2020", "Andrew Ferguson - 2012", "Andrew Ferguson - 2013"}.
@@ -163,7 +162,7 @@ public class JavaStreamApi {
      * for example, `Arrays.asList( new People(«Victor», 16, Sex.MAN),
      * new People(«Helen», 42, Sex.WOMEN))`,
      * select from the List only men whose age is from `fromAge` to `toAge` inclusively.
-     * <p>
+     *
      * Example: select men who can be recruited to army (from 18 to 27 years old inclusively).
      */
     public List<People> selectMenByAge(List<People> peopleList, int fromAge, int toAge) {
@@ -179,7 +178,7 @@ public class JavaStreamApi {
      * new People(«Helen», 42, Sex.WOMEN))`,
      * select from the List only people whose age is from `fromAge` and to `maleToAge` (for men)
      * or to `femaleToAge` (for women) inclusively.
-     * <p>
+     *
      * Example: select people of working age
      * (from 18 y.o. and to 60 y.o. for men and to 55 y.o. for women inclusively).
      */
