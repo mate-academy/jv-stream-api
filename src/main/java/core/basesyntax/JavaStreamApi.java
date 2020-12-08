@@ -35,9 +35,8 @@ public class JavaStreamApi {
      * Given list of strings where each element contains 1+ numbers:
      * input = {"5,30,100", "0, 22, 7", ...}
      * return min integer value. One more thing - we're interested in even numbers.
-     * If there is no throw RuntimeException with message "Can't get min value from list: method_input_list"
+     * If there is no needed data throw RuntimeException with message "Can't get min value from list: method_input_list"
      */
-
     public int findMinEvenNumber(List<String> numbers) {
         return numbers.stream()
             .flatMap(n -> Arrays.stream(n.split(",")))
@@ -48,10 +47,9 @@ public class JavaStreamApi {
     }
 
     /**
-     * Given List of string where each element represents person and its' age:
+     * Given List of string where each element represents persons' age and name:
      * {"99:Johny", "20:Brad", ...} return the age of the oldest person
      */
-
     public static long getOldestPersonAge(List<String> peoples) {
         return peoples.stream()
             .map(p -> Integer.valueOf(p.split(":")[0]))
@@ -64,7 +62,6 @@ public class JavaStreamApi {
      * to increment char value of each symbol from the string. Amount to increment is
      * passed with the second input param - 'increment'
      */
-
     public String charsIncrementation(String string, int increment) {
         return string.chars()
             .mapToObj(c -> (char) (c += increment))
@@ -84,7 +81,6 @@ public class JavaStreamApi {
      * Given a arrays of ints, return three smallest numbers as list in sorted manner.
      * For example for input {4, 1, 10, 20, 11, 3} output will be {1, 3, 4};
      */
-
     public List<Integer> getThreeSmallestNumbers(int[] numbers) {
         return Arrays.stream(numbers)
             .boxed()
@@ -95,13 +91,13 @@ public class JavaStreamApi {
 
     /**
      * Given a list of integer numbers, convert each integer into its' binary representation in string format
-     * and join all of them into a single string and putting each value into brackets, it will look like this:
+     * and join all of them into a single string and putting each value into brackets, it should look like this:
      * Input: {1, 20, 33}
-     * Output: [1]
+     * Output:
+     * [1]
      * [10100]
      * [100001]
      */
-
     public String convertAndModifyNumbers(List<Integer> numbers) {
         return numbers.stream()
             .map(Integer::toBinaryString)
@@ -110,16 +106,15 @@ public class JavaStreamApi {
 
 
     /**
-     * Given list strings representing records of patient visits to Hospital
-     * {"John Stevenson - 2020", "Andrew Ferguson - 2012", "Andrew Ferguson - 2013"} and year in integer value
-     * Return list of persons who visited hospital during given year. Be careful one person
-     * may visit a hospital several times per year and for each visit new record will be generated.
-     * Result shouldn't contain duplicates.
+     * Given list strings representing records of patients' visits to a Hospital
+     * {"John Stevenson - 2020", "Andrew Ferguson - 2012", "Andrew Ferguson - 2013"}.
+     * Return number of unique persons who have visited hospital during the given year (second input param).
+     * Be careful, because one person may visit a hospital several times per year and for each visit new record
+     * will be generated. Result shouldn't contain duplicates.
      */
     public long getRecordsPerYear(List<String> records, int year) {
         return records.stream()
-            .map(r -> r.split("-"))
-            .filter(r -> Integer.parseInt(r[1]) == year)
+            .filter(r -> Integer.parseInt(r.split("-")[1]) == year)
             .distinct()
             .count();
     }
@@ -130,7 +125,6 @@ public class JavaStreamApi {
      * Example input : {"Sun.ltd" : 20_000}, {"Micro" : -5_200}, {"Clarity": 0.00}, {"Odyssey": 9_640};
      * Output : {"Sun.ltd", "Odyssey"}
      */
-
     public List<String> getCompanies(Map<String, Double> input) {
         return input.entrySet()
             .stream()
@@ -213,13 +207,13 @@ public class JavaStreamApi {
     }
 
     /**
-     * Given list of candidates, where each element has Candidate.class type. Check which candidates are
-     * eligible to apply for president position. The requirements are: person should be older than 35 y, should be
-     * allowed to vote, have nationality - 'Ukrainian' and live in urk for 10 years. For the last requirement use
-     * field periodsInUkr, which has following view: "2002-2015" For now we don't care if that was last 10 or not.
-     * We want to reuse our validation in future, so let's write our own impl of Predicate<Candidate> in CandidateValidator
+     * Your help with a election is needed. Given list of candidates, where each element has Candidate.class type.
+     * Check which candidates are eligible to apply for president position and return their names sorted alphabetically.
+     * The requirements are: person should be older than 35 y, should be allowed to vote, have nationality - 'Ukrainian'
+     * and live in urk for 10 years. For the last requirement use field periodsInUkr, which has following view:
+     * "2002-2015" For now we don't care if that was last 10 or not. We want to reuse our validation in future, so
+     * let's write our own impl of Predicate<Candidate> in CandidateValidator.
      */
-
     public static List<String> validateCandidates(List<Candidate> candidates) {
         return candidates.stream()
             .filter(new CandidateValidator())
@@ -229,24 +223,9 @@ public class JavaStreamApi {
     }
 
     /**
-     * We want to gather a bit of statistics: we have list of people and we want to know
-     * distribution among the age of women who have cats and are older than 18
-     * Result should have the following view: Map.of(19 - List.of(person1, person2, ...),
-     *                                               21 - List.of(person3, person7, ...);
-     */
-
-    public Map<Integer, List<People>> groupByAge(List<People> people) {
-        return people.stream()
-            .filter(p -> p.getSex() == People.Sex.WOMEN && p.getAge() >= 18
-            && !p.getCatList().isEmpty())
-            .collect(Collectors.groupingBy(People::getAge));
-    }
-
-    /**
      * Given a list of random strings, group all of them by the last letter from the
      * string. Skip punctuation and numbers.
      */
-
     public Map<Character, List<String>> groupWordsByLastChar(List<String> words) {
         return words.stream()
             .filter(w -> Character.isAlphabetic(w.charAt(w.length() - 1)))
@@ -254,10 +233,22 @@ public class JavaStreamApi {
     }
 
     /**
-     * Given array of numbers, your task is to sort them in the reverse order and return only those
-     * numbers that can be divided by 5 without remainder.
+     * We want to gather some statistics: we have list of people and we want to know
+     * distribution among the age of women who have cats and are older than 18
+     * Result should have the following view: Map.of(19 - List.of(person1, person2, ...),
+     *                                               21 - List.of(person3, person7, ...);
      */
+    public Map<Integer, List<People>> groupByAge(List<People> people) {
+        return people.stream()
+            .filter(p -> p.getSex() == People.Sex.WOMEN && p.getAge() >= 18
+                && !p.getCatList().isEmpty())
+            .collect(Collectors.groupingBy(People::getAge));
+    }
 
+    /**
+     * Given array of numbers, your task is to sort them in the reverse order and return only those
+     * numbers that can be divided by 5 without a remainder.
+     */
     public List<Integer> filterAndReverse(int[] inputNumbers) {
         return Arrays.stream(inputNumbers)
             .filter(n -> n % 5 == 0)
