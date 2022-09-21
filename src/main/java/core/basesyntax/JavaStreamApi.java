@@ -61,7 +61,7 @@ public class JavaStreamApi {
                 .map(i -> i % 2 == 1 ? numbers.get(i) - 1 : numbers.get(i))
                 .filter(n -> n % 2 == 1)
                 .average()
-                .orElseThrow();
+                .getAsDouble();
     }
 
     /**
